@@ -1,0 +1,866 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi" class="no-js no-svg">
+<head>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link media="all" href="~/Content/css/autoptimize_ca3240383a20f0a93d0dba182352adbe.css" rel="stylesheet" />
+    <link media="all" href="~/Content/css/autoptimize_e7e7c3e4cb66370614ceafdd89019c55.css" rel="stylesheet" />
+    @*<link media="all" href="~/Content/css/autoptimize_bbedb799b240bb8a8171a163ee088c23.css" rel="stylesheet" />*@
+    <link media="all" href="~/Content/css/autoptimize_94689637aec9580da0bb60a960657d30.css" rel="stylesheet" />
+    <link href="~/Content/css/ncmm.webflow.5d476b4e4.css" rel="stylesheet" />
+    <title>Phần mềm Hóa đơn điện tử M-Invoice - Hóa đơn điện tử</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="1WvSnq2-4YNxiMjiVDdWS0nX-rKQmIcK-RfdHjsftag" />
+    <meta name="msvalidate.01" content="B3CE5851E575DD50F47B1536484258E6" />
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="~/Content/img/logo-app-02.png">
+    <script>(function (html) { html.className = html.className.replace(/\bno-js\b/, 'js') })(document.documentElement);</script>
+    <title>Phần mềm Hóa đơn điện tử M-Invoice - Hóa đơn điện tử</title>
+    <meta name="description" content="Hóa đơn điện tử M-Invoice là chuyên cung cấp Giải pháp Hóa đơn điện tử tại Việt Nam. Giải pháp tích hợp với hơn 50 phần mềm. Miễn phí tích hợp" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://minvoice.vn/" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hóa đơn điện tử M-Invoice" />
+    <meta property="og:description" content="Hóa đơn điện tử M-Invoice là chuyên cung cấp Giải pháp Hóa đơn điện tử tại Việt Nam. Giải pháp tích hợp với hơn 50 phần mềm. Miễn phí tích hợp" />
+    <meta property="og:url" content="https://minvoice.vn/" />
+    <meta property="og:site_name" content="Phần mềm Hóa đơn điện tử M-Invoice" />
+    <meta property="article:publisher" content="https://www.facebook.com/minvoice.vn" />
+    <meta property="article:modified_time" content="2020-07-21T06:49:15+00:00" />
+    <meta property="og:image" content="~/Content/img/LOGO-NenCam512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json" class="yoast-schema-graph">
+        {"@@context":"https://schema.org","@@graph":[{"@@type":"Organization","@@id":"https://minvoice.vn/#organization","name":"M-Invoice Co.,Ltd","url":"https://minvoice.vn/","sameAs":["https://www.facebook.com/minvoice.vn"],"logo":{"@@type":"ImageObject","@@id":"https://minvoice.vn/#logo","inLanguage":"vi","url":"~/Content/img/LOGO-NenCam512.png","width":512,"height":512,"caption":"M-Invoice Co.,Ltd"},"image":{"@@id":"https://minvoice.vn/#logo"}},{"@@type":"WebSite","@@id":"https://minvoice.vn/#website","url":"https://minvoice.vn/","name":"Ph\u1ea7n m\u1ec1m H\u00f3a \u0111\u01a1n \u0111i\u1ec7n t\u1eed M-Invoice","description":"Ph\u1ea7n m\u1ec1m h\u00f3a \u0111\u01a1n \u0111i\u1ec7n t\u1eed M-Invoice","publisher":{"@@id":"https://minvoice.vn/#organization"},"potentialAction":[{"@@type":"SearchAction","target":"https://minvoice.vn/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"vi"},{"@@type":"ImageObject","@@id":"https://minvoice.vn/#primaryimage","inLanguage":"vi","url":"~/Content/img/LOGO-NenCam512.png","width":512,"height":512},{"@@type":"WebPage","@@id":"https://minvoice.vn/#webpage","url":"https://minvoice.vn/","name":"Ph\u1ea7n m\u1ec1m H\u00f3a \u0111\u01a1n \u0111i\u1ec7n t\u1eed M-Invoice - H\u00f3a \u0111\u01a1n \u0111i\u1ec7n t\u1eed","isPartOf":{"@@id":"https://minvoice.vn/#website"},"about":{"@@id":"https://minvoice.vn/#organization"},"primaryImageOfPage":{"@@id":"https://minvoice.vn/#primaryimage"},"datePublished":"2018-03-21T11:38:47+00:00","dateModified":"2020-07-21T06:49:15+00:00","description":"H\u00f3a \u0111\u01a1n \u0111i\u1ec7n t\u1eed M-Invoice l\u00e0 chuy\u00ean cung c\u1ea5p Gi\u1ea3i ph\u00e1p H\u00f3a \u0111\u01a1n \u0111i\u1ec7n t\u1eed t\u1ea1i Vi\u1ec7t Nam. Gi\u1ea3i ph\u00e1p t\u00edch h\u1ee3p v\u1edbi h\u01a1n 50 ph\u1ea7n m\u1ec1m. Mi\u1ec5n ph\u00ed t\u00edch h\u1ee3p","inLanguage":"vi","potentialAction":[{"@@type":"ReadAction","target":["https://minvoice.vn/"]}]}]}
+    </script>
+    <link rel='dns-prefetch' href='//s.w.org' />
+    <link rel="alternate" type="application/rss+xml" title="Dòng thông tin Phần mềm Hóa đơn điện tử M-Invoice &raquo;" href="https://minvoice.vn/feed/" />
+    <link rel="alternate" type="application/rss+xml" title="Dòng phản hồi Phần mềm Hóa đơn điện tử M-Invoice &raquo;" href="https://minvoice.vn/comments/feed/" />
+    <script type="text/javascript" data-cfasync="false">
+        var em_version = '6.2.2';
+        var em_track_user = true;
+        var em_no_track_reason = '';
+
+        var disableStr = 'ga-disable-UA-158909306-2';
+
+        /* Function to detect opted out users */
+        function __gaTrackerIsOptedOut() {
+            return document.cookie.indexOf(disableStr + '=true') > -1;
+        }
+
+        /* Disable tracking if the opt-out cookie exists. */
+        if (__gaTrackerIsOptedOut()) {
+            window[disableStr] = true;
+        }
+
+        /* Opt-out function */
+        function __gaTrackerOptout() {
+            document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+            window[disableStr] = true;
+        }
+
+        if ('undefined' === typeof gaOptout) {
+            function gaOptout() {
+                __gaTrackerOptout();
+            }
+        }
+
+        if (em_track_user) {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', '__gaTracker');
+
+            window.ga = __gaTracker; __gaTracker('create', 'UA-158909306-2', 'auto');
+            __gaTracker('set', 'forceSSL', true);
+            __gaTracker('send', 'pageview');
+            __gaTracker(function () { window.ga = __gaTracker; });
+        } else {
+            console.log("");
+            (function () {
+                /* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+                var noopfn = function () {
+                    return null;
+                };
+                var noopnullfn = function () {
+                    return null;
+                };
+                var Tracker = function () {
+                    return null;
+                };
+                var p = Tracker.prototype;
+                p.get = noopfn;
+                p.set = noopfn;
+                p.send = noopfn;
+                var __gaTracker = function () {
+                    var len = arguments.length;
+                    if (len === 0) {
+                        return;
+                    }
+                    var f = arguments[len - 1];
+                    if (typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function') {
+                        console.log('Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + em_no_track_reason);
+                        return;
+                    }
+                    try {
+                        f.hitCallback();
+                    } catch (ex) {
+
+                    }
+                };
+                __gaTracker.create = function () {
+                    return new Tracker();
+                };
+                __gaTracker.getByName = noopnullfn;
+                __gaTracker.getAll = function () {
+                    return [];
+                };
+                __gaTracker.remove = noopfn;
+                window['__gaTracker'] = __gaTracker;
+                window.ga = __gaTracker;
+            })();
+        }</script>
+    <script type="text/javascript">
+        window._wpemojiSettings = { "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/", "ext": ".png", "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/", "svgExt": ".svg", "source": { "concatemoji": "Content\/js\/wp-emoji-release.min.js" } };
+        !function (e, a, t) {
+            var r, n, o, i, p = a.createElement("canvas"), s = p.getContext && p.getContext("2d");
+            function c(e, t) {
+                var a = String.fromCharCode; s.clearRect(0, 0, p.width, p.height), s.fillText(a.apply(this, e), 0, 0); var r = p.toDataURL();
+                return s.clearRect(0, 0, p.width, p.height), s.fillText(a.apply(this, t), 0, 0), r === p.toDataURL()
+            } function l(e) { if (!s || !s.fillText) return !1; switch (s.textBaseline = "top", s.font = "600 32px Arial", e) { case "flag": return !c([127987, 65039, 8205, 9895, 65039], [127987, 65039, 8203, 9895, 65039]) && (!c([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819]) && !c([55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447])); case "emoji": return !c([55357, 56424, 8205, 55356, 57212], [55357, 56424, 8203, 55356, 57212]) }return !1 } function d(e) { var t = a.createElement("script"); t.src = e, t.defer = t.type = "text/javascript", a.getElementsByTagName("head")[0].appendChild(t) } for (i = Array("flag", "emoji"), t.supports = { everything: !0, everythingExceptFlag: !0 }, o = 0; o < i.length; o++)t.supports[i[o]] = l(i[o]), t.supports.everything = t.supports.everything && t.supports[i[o]], "flag" !== i[o] && (t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && t.supports[i[o]]); t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && !t.supports.flag, t.DOMReady = !1, t.readyCallback = function () { t.DOMReady = !0 }, t.supports.everything || (n = function () { t.readyCallback() }, a.addEventListener ? (a.addEventListener("DOMContentLoaded", n, !1), e.addEventListener("load", n, !1)) : (e.attachEvent("onload", n), a.attachEvent("onreadystatechange", function () { "complete" === a.readyState && t.readyCallback() })), (r = t.source || {}).concatemoji ? d(r.concatemoji) : r.wpemoji && r.twemoji && (d(r.twemoji), d(r.wpemoji)))
+        }(window, document, window._wpemojiSettings);</script>
+    <!--[if lt IE 9]><link rel='stylesheet' id='vietmoz-ie8-css'  href='https://minvoice.vn/wp-content/themes/vietmoz/assets/css/ie8.css?ver=1.0' type='text/css' media='all' /> <![endif]-->
+    @*<script>if (document.location.protocol != "https:") { document.location = document.URL.replace(/^http:/i, "https:"); }</script>*@
+    <script type='text/javascript' id='exactmetrics-frontend-script-js-extra'>
+        var exactmetrics_frontend = { "js_events_tracking": "true", "download_extensions": "zip,mp3,mpeg,pdf,docx,pptx,xlsx,rar", "inbound_paths": "[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]", "home_url": "https:\/\/minvoice.vn", "hash_tracking": "false" };</script>
+    <script type='text/javascript' src='~/Content/js/jquery.js' id='jquery-core-js'></script>
+    <!--[if lt IE 9]> <script type='text/javascript' src='https://minvoice.vn/wp-content/themes/vietmoz/assets/js/lib/html5.js?ver=3.7.3' id='html5-js'></script> <![endif]-->
+    <link rel="https://api.w.org/" href="https://minvoice.vn/wp-json/" />
+    <link rel="alternate" type="application/json" href="https://minvoice.vn/wp-json/wp/v2/pages/2176" />
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://minvoice.vn/xmlrpc.php?rsd" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://minvoice.vn/wp-includes/wlwmanifest.xml" />
+    <meta name="generator" content="WordPress 5.5.1" />
+    <link rel='shortlink' href='https://minvoice.vn/' />
+    <link rel="alternate" type="application/json+oembed" href="https://minvoice.vn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fminvoice.vn%2F" />
+    <link rel="alternate" type="text/xml+oembed" href="https://minvoice.vn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fminvoice.vn%2F&#038;format=xml" />
+    <meta name="framework" content="Redux 4.1.20" />
+    <script>readMoreArgs = []</script>
+    <script type="text/javascript">
+        EXPM_VERSION = 2.59; EXPM_AJAX_URL = 'https://minvoice.vn/wp-admin/admin-ajax.php';
+        function yrmAddEvent(element, eventName, fn) {
+            if (element.addEventListener)
+                element.addEventListener(eventName, fn, false);
+            else if (element.attachEvent)
+                element.attachEvent('on' + eventName, fn);
+        }</script>
+    <meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress." />
+    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://minvoice.vn/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]-->
+    <link rel="icon" href="~/Content/img/cropped-logo-app-02-32x32.png" sizes="32x32" />
+    <link rel="icon" href="~/Content/img/cropped-logo-app-02-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="~/Content/img/cropped-logo-app-02-180x180.png" />
+    <meta name="msapplication-TileImage" content="~/Content/img/cropped-logo-app-02-270x270.png" />
+    <noscript>
+        <style type="text/css">
+            .wpb_animate_when_almost_visible {
+                opacity: 1;
+            }
+        </style>
+    </noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158909306-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-158909306-1');</script>
+    <script>
+        (function (w, d, u) {
+            var s = d.createElement('script'); s.async = true; s.src = u + '?' + (Date.now() / 60000 | 0);
+            var h = d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
+        })(window, document, 'https://cdn.bitrix24.vn/b13607523/crm/tag/call.tracker.js');</script>
+
+    <style>
+        #post-68 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        #pp_full_res123 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        #pp_full_res {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        .modal-header {
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: 0.3rem;
+            border-top-right-radius: 0.3rem;
+            /* display: -webkit-box; */
+            display: flex;
+            -webkit-box-align: start;
+            align-items: flex-start;
+        }
+
+        @@media screen and (max-width:768px) {
+            #dkycontent {
+                width: 75%;
+                margin-top: 0px;
+            }
+        }
+
+        @@media screen and (min-width:769px) {
+            #dkycontent {
+                width: 50%;
+                margin-top: 50px;
+            }
+        }
+
+        .wpsisac-image-slide {
+            cursor: pointer;
+        }
+
+        .showpop {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gioithieuminvoice {
+            margin-top: 30px !important;
+            background-image: url('../../Content/img/Subtraction-8.png')!important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+
+        /*.gioithieu_fix {
+            margin-left: unset !important;
+        }*/
+
+        .abc {
+            background-image: url('../../Content/img/bg1-01.png')!important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+        #popup_mst {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display:none;
+            z-index: 99999;
+        }
+        #contentpopup_mst {
+            width: 50%;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            border: 5px solid red;
+            background-color: white;
+            z-index: 99999;
+            display:block;
+        }
+        @@media screen and (min-width:768px) {
+            #contentpopup_mst {
+                width: 40%;
+                
+            }
+        }
+        .info_account{
+            display:none;
+        }
+    </style>
+
+
+
+
+
+</head>
+<body data-rsssl=1 class="home page-template page-template-templates page-template-page-full-width page-template-templatespage-full-width-php page page-id-2176 website-style-4 sidebar-right widget-style-2 pagination-style-1 footer-layout-6 vc-enabled wpb-js-composer js-comp-ver-5.2.1 vc_responsive">
+    <div class="l-subheader at_top">
+        <div class="l-subheader-h">
+            <div class="l-subheader-cell at_left">
+                <div class="w-text ush_text_1 font_regular">
+                    <div class="w-text-h">
+                        <i class="fa fa-phone"></i>
+                        <span class="w-text-value"><a style="text-decoration: none; color: #337ab7" href="tel:0909500126" target="_blank">0909 500 126</a></span>
+                    </div>
+                </div><div class="w-text ush_text_2 font_regular">
+                    <div class="w-text-h">
+                        <i class="fa fa-envelope"></i>
+                        <span class="w-text-value"><a style="text-decoration: none; color: #337ab7" href="mailto:info@minvoice.vn" target="_blank">info@minvoice.vn</a></span>
+                    </div>
+                </div><div class="l-subheader-cell at_right">
+                    <i style="color: red" class="fas fa-map-marker-alt"></i>
+                    <span class="w-text-value"><a style="text-decoration: none; color: #337ab7" href="https://minvoice.vn/lien-he/" target="_blank">Đường tới M-Invoice </a></span>
+                </div>
+            </div>
+        </div>
+    </div><div id="page" class="site">
+        <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+        <header id="masthead" class="site-header default-header" role="banner">
+            <div class="container">
+                <div class="insider">
+                    <div class="site-title"> <a href="https://minvoice.vn/" rel="home"> <img src="~/Content/img/LOG-Chu-copy.png" width="220" /> </a></div><nav id="primary-menu" class="main-menu" role="navigation" aria-label="Primary Menu"><ul id="menu-main-menu" class="vietmoz-menu"><li id="menu-item-5043" class="fontmenu menu-item menu-item-type-custom menu-item-object-custom menu-item-5043"><a href="https://minvoice.vn/hoa-don-dien-tu/">HÓA ĐƠN ĐIỆN TỬ</a></li><li id="menu-item-2758" class="fontmenu menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2758"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/">Hỏi đáp &#038; Kiến thức về HĐĐT</a><span class="dropdown-toggler"></span><ul class="sub-menu"><li id="menu-item-6404" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6404"><a title="https://minvoice.vn/hoi-dap-hoa-don-dien-tu/" href="https://minvoice.vn/hoi-dap-hoa-don-dien-tu/">Hỏi đáp về Hóa đơn điện tử</a></li><li id="menu-item-2293" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2293"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/quy-dinh-ve-hoa-don-dien-tu/">Kiến thức về HĐĐT</a></li><li id="menu-item-3075" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3075"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/van-ban-hoa-don-dien-tu/">Văn bản HĐĐT</a></li><li id="menu-item-2307" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2307"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/">Tin tức</a></li></ul></li><li id="menu-item-293" class="fontmenu menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293"><a href="https://minvoice.vn/khach-hang-hoa-don-dien-tu/">KHÁCH HÀNG</a><span class="dropdown-toggler"></span><ul class="sub-menu"><li id="menu-item-6344" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6344"><a href="https://minvoice.vn/mau-hoa-don-minvoice/">Mẫu hóa đơn M-Invoice</a></li><li id="menu-item-6359" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6359"><a href="https://minvoice.vn/dang-ky-su-dung/">Đăng ký Sử dụng</a></li><li id="menu-item-6398" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6398"><a href="https://minvoice.vn/bao-gia-m-invoice/">Báo Giá M-Invoice</a></li><li id="menu-item-6403" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6403"><a href="https://minvoice.vn/doi-tac-khach-hang/doi-tac-cua-m-invoice/">Đối tác của M-invoice</a></li></ul></li><li id="menu-item-2864" class="fontmenu menu-item menu-item-type-custom menu-item-object-custom menu-item-2864"><a target="_blank" href="http://tracuuhoadon.minvoice.vn/">TRA CỨU</a></li><li id="menu-item-6002" class="fontmenu menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-6002"><a href="https://minvoice.vn/">TẢI VỀ</a></li><li id="menu-item-6358" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6358"><a href="https://minvoice.vn/dang-ky-dai-ly-hoa-don-dien-tu/">ĐĂNG KÝ ĐẠI LÝ</a></li></ul></nav>
+                </div>
+            </div>
+        </header>
+        <div id="mhead" class="site-header default-mobile-header" role="banner">
+            <div class="container"><div class="insider"><div class="menu-toggler apple"> Menu</div><div class="site-title"> <a href="https://minvoice.vn/" rel="home"> <img src="~/Content/img/LOG-Chu-copy.png" width="100" /> </a></div><div class="search-toggler"> Search</div></div></div>
+            <div id="search-holder">
+                <div id="search-wrapper">
+                    <div class="container">
+                        <form role="search" method="get" class="search-form" action="https://minvoice.vn/">
+                            <input type="search" id="search-form-5f7a7c390c3fe" class="search-field"
+                                   placeholder="Search &hellip;"
+                                   value="" name="s" />
+                            <button type="submit" class="search-submit">
+                                <span class="vietmoz-search-icon"></span><span class="screen-reader-text">Search</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div><div id="nav-holder"><nav id="m-menu" class="mobile-menu" role="navigation" aria-label="Mobile Menu"><div class="container"><ul id="menu-main-menu-1" class="vietmoz-m-menu"><li class="fontmenu menu-item menu-item-type-custom menu-item-object-custom menu-item-5043"><a href="https://minvoice.vn/hoa-don-dien-tu/">HÓA ĐƠN ĐIỆN TỬ</a></li><li class="fontmenu menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2758"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/">Hỏi đáp &#038; Kiến thức về HĐĐT</a><span class="dropdown-toggler"></span><ul class="sub-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6404"><a title="https://minvoice.vn/hoi-dap-hoa-don-dien-tu/" href="https://minvoice.vn/hoi-dap-hoa-don-dien-tu/">Hỏi đáp về Hóa đơn điện tử</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2293"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/quy-dinh-ve-hoa-don-dien-tu/">Kiến thức về HĐĐT</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3075"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/van-ban-hoa-don-dien-tu/">Văn bản HĐĐT</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2307"><a href="https://minvoice.vn/hoi-dap-tin-tuc-hoa-don-dien-tu/">Tin tức</a></li></ul></li><li class="fontmenu menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293"><a href="https://minvoice.vn/khach-hang-hoa-don-dien-tu/">KHÁCH HÀNG</a><span class="dropdown-toggler"></span><ul class="sub-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6344"><a href="https://minvoice.vn/mau-hoa-don-minvoice/">Mẫu hóa đơn M-Invoice</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6359"><a href="https://minvoice.vn/dang-ky-su-dung/">Đăng ký Sử dụng</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6398"><a href="https://minvoice.vn/bao-gia-m-invoice/">Báo Giá M-Invoice</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6403"><a href="https://minvoice.vn/doi-tac-khach-hang/doi-tac-cua-m-invoice/">Đối tác của M-invoice</a></li></ul></li><li class="fontmenu menu-item menu-item-type-custom menu-item-object-custom menu-item-2864"><a target="_blank" href="http://tracuuhoadon.minvoice.vn/">TRA CỨU</a></li><li class="fontmenu menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-6002"><a href="https://minvoice.vn/">TẢI VỀ</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6358"><a href="https://minvoice.vn/dang-ky-dai-ly-hoa-don-dien-tu/">ĐĂNG KÝ ĐẠI LÝ</a></li></ul></div></nav></div>
+        </div>
+        <div id="content" class="container site-content">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="container"><div class="row"><div class="grid-sizer"></div><div id="footer-1" class="footer-sidebar"><section id="black-studio-tinymce-4" class="footer-widget widget widget_black_studio_tinymce"><h3 class="widget-title"></h3><div class="textwidget"><div class="title"><h2>LIÊN HỆ MUA HÀNG</h2></div><div class="address-item"><h3 class="item-name han">TRỤ SỞ CHÍNH</h3><ul><li>Tòa nhà Petrowaco, 97-99 Láng Hạ, Q.Đống Đa, Hà Nội</li><li>Hotline: 0901 80 16 18</li><li>Email: info@minvocie.vn</li></ul><p>&nbsp;</p><h3 class="item-name han">CN Hồ Chí Minh</h3><ul><li>Số 2 Đường Nguyễn Thế Lộc, Phường 12, Quận Tân Bình</li><li>Hotline: 0909 500 126</li><li>Email: infohcm@minvocie.vn</li></ul></div></div></section></div><div id="footer-2" class="footer-sidebar"><section id="black-studio-tinymce-5" class="footer-widget widget widget_black_studio_tinymce"><h3 class="widget-title"></h3><div class="textwidget"><div class="btnfooter2"><ul><li><a class="contact-buy-now" href="https://forms.gle/9zsQxhXyXRpnrddq7" target="_blank" rel="noopener">MUA NGAY</a></li><li><a class="contact-video-demo" href="https://www.youtube.com/watch?v=dT6d-Yjv2OE&amp;list=PLpmokHjV2pDq81PjcDZFZwoEC_CqYi9ET" target="_blank" rel="noopener">XEM DEMO</a></li><li><a class="contact-free-trial" href="https://minvoice.vn/dang-ky-dai-ly/" target="_blank" rel="noopener">ĐĂNG KÝ ĐẠI LÝ</a></li></ul></div><div class="address-item"><h3 class="item-name han">CN HÀ NỘI</h3><ul><li>Số nhà 27 liền kề 14 KĐT Văn Khê, Hà Đông</li><li>Hotline: 0899 90 16 18</li><li>Email: infohn@minvocie.vn</li></ul><p>&nbsp;</p><h3 class="item-name han">CN ĐÀ NẴNG</h3><ul><li>Số 100, Lê Tấn Trung, P.Thọ Quang, Q.Sơn Trà</li><li>Hotline: 0915 777 591</li><li>Email: infodn@minvocie.vn</li></ul></div></div></section></div><div id="footer-3" class="footer-sidebar"><section id="black-studio-tinymce-10" class="footer-widget widget widget_black_studio_tinymce"><h3 class="widget-title"></h3><div class="textwidget"><div class="hotlineft3"><h4>HOTLINE MUA HÀNG : 0909 500 126</h4></div><div class="address-item"><p class="item-name han">CN HẢI DƯƠNG</p><ul><li>Khu 1, Phường Thạch Khôi, Tp.Hải Dương</li><li>Hotline: 02203 833 666</li><li>Email: infohd@minvocie.vn</li></ul><p>&nbsp;</p><p class="item-name han">CN THANH HÓA</p><ul><li>Số 68 Trần Bình Trọng, P. Đông Sơn, Tp Thanh Hoá</li><li>Hotline: 0901 80 16 18</li><li>Email: info@minvocie.vn</li></ul></div></div></section></div></div></div><div class="bottom-footer">
+                <div class="container">
+                    <section id="text-3" class="footer-bottom widget widget_text">
+                        <div class="textwidget">
+                            <p>
+                                <a href="http://www.dmca.com/Protection/Status.aspx?ID=9c5193d7-6c76-4f3c-a84d-4fadc6695b7f" title="DMCA.com Protection Status" class="dmca-badge"> <img src="//images.dmca.com/Badges/dmca-badge-w150-5x1-03.png?ID=9c5193d7-6c76-4f3c-a84d-4fadc6695b7f" alt="DMCA.com Protection Status"><br /> </a><br />
+                                <script src="//images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </footer><div class="copyright"><div class="container"> <a href="https://minvoice.vn"> Copyrights &copy; 2020 Phần mềm Hóa đơn điện tử M-Invoice. All Rights Reserved. </a></div></div>
+    </div>
+
+    @*//cơbản*@
+    <div id="pp_full_res" onclick="hidePopup1()"><img id="fullResImage1" src="~/Content/img/z2117963081381_2db42d29247489631503331351991e4d-1024x556.jpg" style="height: 556px; width: 1024px;"></div>
+    @*nang cao*@
+    <div id="pp_full_res123" onclick="hidePopup()"><img id="fullResImage" src="~/Content/img/z2117997316311_a12653a529f647dea7e8a9c3383d1df8-1024x557.jpg" style="height: 557px; width: 1024px;"></div>
+    @*<div id="popup_mst"></div>*@
+
+    <div class="modal fade" id="popup_mst" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="contentpopup_mst">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Vui lòng cho chúng tôi biết mã số thuế của doanh nghiệp bạn?</h5>
+                <button type="button" class="close" id="close_mst" data-dismiss="modal" aria-label="Close" style="padding: 5px 13px;height: 100%; margin-top: auto; margin-bottom: auto;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body" style="padding: 10px;">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Mã số thuế:</label>
+                        <input type="text" class="form-control" required="" placeholder="Gồm 10 hoặc 13 số" id="_mst">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" style="float:left" class="form-check-input" id="check_account"/>
+                        <label for="exampleCheck1" style="color:red; line-height:16px;" class="form-check-label">Bạn đã có tài khoản xuất hóa đơn của M-invoice?</label>
+                        @*<textarea class="form-control" id="message-text"></textarea>*@
+                    </div>
+                    <div class="form-group info_account">
+                        <label for="recipient-name" class="col-form-label">Tài khoản:</label>
+                        <input type="text" class="form-control" placeholder="Nhập tài khoản" id="_user"/>
+                    </div>
+                    <div class="form-group info_account">
+                        <label for="recipient-name" class="col-form-label">Mật khẩu:</label>
+                        <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="_pass"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="padding: 10px 10px ; text-align:center;">
+
+                    <input type="button" name="go" class="btn btn-primary" id="send_mst" value="Xác nhận">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+           // click xác nhận
+            $('#send_mst').click(function () {
+                var mst1 = $('#_mst').val();
+
+                //
+                debugger;
+                if (mst1.includes("-") == true) {
+                   mst1 = mst1.replace("-", "");
+                } 
+                var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+                // kiểm tra mst hợp lệ không ?
+                if (filter.test(mst1)) {
+                    if (mst1.length == 10 || mst1.length == 13) {
+                        var validate = true;
+                    } else {
+                        alert('Vui lòng nhập vào đúng mã số thuế 10 hoặc 13 ký tự!!!');
+                        var validate = false;
+                    }
+                }
+                else {
+                    if (mst1 == "demohoadon") { var validate = true; }
+                    else {
+                        alert('Vui lòng nhập vào đúng mã số thuế!!!');
+                        var validate = false;
+                    }
+                }
+                if ($("#check_account").is(":checked")) {
+                    var _user = $('#_user').val();
+                    var _pass = $('#_pass').val();
+                    if (_user.length == 0 || _pass.length == 0) {
+
+                        alert('Vui lòng nhập tài khoản và mật khẩu!!!');
+                        var validate = false;
+                    }
+                   
+
+                }
+                //nếu hợp lệ
+                if (validate) {
+                    debugger;
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/Check_MST",
+
+                        data: { mst: mst1, username: _user, password: _pass }
+                    }).done(function (result) {
+                        // check session có không ?
+                        if (result == "") {
+                            // không có session
+                            alert('Vui lòng đăng nhập app M-invoice trên Haravan để thực hiện chức năng này!');
+                            $('#contentpopup_mst').hide();
+                            $('#popup_mst').fadeOut();
+                           
+                        }
+                        // có session
+                        else {
+                            if (_user == undefined && _pass == undefined) {
+                                _user = "ADMINISTRATOR";
+                                _pass = "kythuat";
+                            }
+                            // post api LOGIN
+                            $.ajax({
+                                type: "POST",
+                                url: "https://" + result + ".minvoice.com.vn/api/Account/Login",
+                                contentType: "application/x-www-form-urlencoded",
+                                data: { username: _user, password: _pass , ma_dvcs: "VP" },
+                                dataType: "json"
+                            }).done(function (result1) {
+                                debugger;
+                                // login thành công
+                                if (result1.token != "" && result1.token != undefined) {
+                                    //add data vào database
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/Home/Check_Link",
+
+                                        data: { link: "https://" + result + ".minvoice.com.vn" }
+                                    }).done(function (result) {
+
+                                        if (result == "") {
+                                            // không có session
+                                            $('#contentpopup_mst').hide();
+                                            $('#popup_mst').fadeOut();
+
+                                        }else{
+
+                                        }
+
+                                    }).fail(function () {
+                                        debugger;
+                                        $('#popup_mst').fadeOut();
+                                        $('#contentpopup_mst').hide();
+                                    });
+                                    //redirect đến trang hóa đơn
+                                    window.location.href = "https://" + result + ".minvoice.com.vn";
+
+                                }
+                                else {
+                                    debugger;
+                                    // sai tài khoản hoặc mật khẩu?
+                               
+                                    alert(result1.error +"Vui lòng kiểm tra lại!");
+                                    //$('#popup_mst').fadeOut();
+                                    //$('#contentpopup_mst').hide();
+                                }
+                               
+
+                                // kết nối k ổn định
+                                }).fail(function (result1) {
+                                    //alert('fail rồi');
+                                    debugger;
+                                    if (result1.status==500) {
+                                        debugger;
+                                        console.log(result1.Message);
+                                        alert("Mã số thuế này chưa phát hành hóa đơn điện tử , hoặc chưa được kích hoạt!!");
+                                    }
+                               
+                            });
+                        }
+                        
+                     // kết nối k ổn định
+                    }).fail(function (result) {
+                        alert('Oh no :(');
+                        $('#popup_mst').fadeOut();
+                        $('#contentpopup_mst').hide();
+                    });
+                }
+            ////
+
+              
+            });
+           
+            var session_orgid = '@Session["orgid"]';
+            var session_mst = '@Session["mst"]';
+            var session_link = '@Session["link"]';
+            //console.log(session_orgid);
+            // check xem có session_orgid không
+            debugger;
+            if (session_orgid != "") {
+                //check xem có link trang hóa đơn chưa
+                if (session_link != "") {
+                    //redirect đến trang hóa đơn
+                    window.location.href = session_link;
+                }
+                //chưa có
+                else {
+                    // kiểm tra xem có mst chưa
+                    if (session_mst != "") {
+                        //gọi api login
+                        $.ajax({
+                            type: "POST",
+                            url: "https://" + session_mst + ".minvoice.com.vn/api/Account/Login",
+                            contentType: "application/x-www-form-urlencoded",
+                            data: { username: "ADMINISTRATOR", password: "kythuat", ma_dvcs: "VP" },
+                            dataType: "json"
+                        }).done(function (res) {
+                            debugger;
+                            if (res.token != "" && res.token != undefined) {
+                                //add data vào database
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Home/Check_Link",
+
+                                    data: { link: "https://" + session_mst + ".minvoice.com.vn" }
+                                }).done(function (res1) {
+
+                                    if (res1 == "") {
+                                        // không có session
+                                        $('#contentpopup_mst').hide();
+                                        $('#popup_mst').fadeOut();
+
+                                    } else {
+
+                                    }
+
+                                }).fail(function () {
+                                    $('#popup_mst').fadeOut();
+                                    $('#contentpopup_mst').hide();
+                                });
+                                //redirect đến trang hóa đơn
+
+                                window.location.href = "https://" + session_mst + ".minvoice.com.vn";
+
+                            }
+                            debugger;
+                            if (res.Message != "" && res.Message != undefined) {
+                                // chưa được kích hoạt và có TBPH
+                                debugger;
+                                //$('#popup_mst').fadeOut();
+                                //$('#contentpopup_mst').hide();
+                                alert("Vui lòng kiểm tra mã số thuế đã nhập, bạn vẫn chưa có thông báo phát hành hoặc chưa được kích hoạt tài khoản hóa đơn!!!");
+                                $('#contentpopup_mst').show();
+                                $('#popup_mst').fadeIn();
+
+                            }
+                            debugger;
+                            if (res.error != "" && res.error != undefined) {
+                                 // sai tài khoản hoặc mật khẩu?
+
+                                $('#popup_mst').fadeOut();
+                                $('#contentpopup_mst').hide();
+                                //add data vào database
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Home/Check_Link",
+
+                                    data: { link: "https://" + session_mst + ".minvoice.com.vn" }
+                                }).done(function (res1) {
+
+                                    if (res1 == "") {
+                                        // không có session
+                                        $('#contentpopup_mst').hide();
+                                        $('#popup_mst').fadeOut();
+
+                                    } else {
+
+                                    }
+
+                                    }).fail(function () {
+                                    
+                                        debugger;
+                                    $('#popup_mst').fadeOut();
+                                    $('#contentpopup_mst').hide();
+                                });
+                                //redirect đến trang hóa đơn
+
+                                window.location.href = "https://" + session_mst + ".minvoice.com.vn";
+                            }
+                               
+
+                                // kết nối k ổn định
+                            }).fail(function (result1) {
+                                alert("Vui lòng kiểm tra mã số thuế đã nhập, bạn vẫn chưa có thông báo phát hành hoặc chưa được kích hoạt tài khoản hóa đơn!!!");
+                                $('#contentpopup_mst').show();
+                                $('#popup_mst').fadeIn();
+                            });
+
+                    }
+                    // nếu chưa có mst 
+                    else {
+                        $('#contentpopup_mst').show();
+                        $('#popup_mst').fadeIn();
+                    }
+                }
+            
+            }
+            
+            //$('#contentpopup_mst').show();
+            //$('#popup_mst').fadeIn();
+            //if ($('#contentpopup_mst').css("display") == "block") {
+            //    $(window).scroll(function () { return false; });
+            //}
+
+            
+            $("#check_account").click(function () {
+                
+                if ($(this).is(":checked")) {
+                    $(".info_account").show();
+                } else {
+                 
+                    $(".info_account").hide();
+                }
+            });
+
+           
+
+            $('#close_mst').click(function () {
+                $('#popup_mst').fadeOut();
+                $('#contentpopup_mst').hide();
+            });
+            $('#popup_mst').click(function (e) {
+                $('#popup_mst').fadeOut();
+                $('#contentpopup_mst').hide();
+            });
+
+
+        });
+
+        //$('#exampleModal').on('show.bs.modal', function (event) {
+        //    var button = $(event.relatedTarget) // Button that triggered the modal
+        //    var recipient = button.data('whatever') // Extract info from data-* attributes
+        //    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        //    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //    var modal = $(this)
+        //    modal.find('.modal-title').text('New message to ' + recipient)
+        //    modal.find('.modal-body input').val(recipient)
+        //})
+    </script>
+
+
+    <script>
+        (function (w, d, u) {
+            var s = d.createElement('script'); s.async = true; s.src = u + '?' + (Date.now() / 60000 | 0);
+            var h = d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
+        })(window, document, 'https://cdn.bitrix24.vn/b13607523/crm/site_button/loader_15_a6uiit.js');</script>
+    <button id="back-to-top" class="back-to-top shape-square style-square"> </button><div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <script>readMoreArgs[1] = { "type": "inline", "expm-title": "", "button-width": "", "button-height": "", "animation-duration": "1000", "font-size": "13px", "yrm-btn-hover-animate": "", "scroll-to-initial-position": "", "yrm-dimension-mode": "", "yrm-button-padding-top": "0", "yrm-button-padding-right": "0", "yrm-button-padding-bottom": "0", "yrm-button-padding-left": "0", "show-content-gradient": "", "show-content-gradient-height": "80", "show-content-gradient-position": "-160", "yrm-custom-css": "", "yrm-editor-js": "", "hide-button-after-click": "", "hide-button-blog-post": "", "default-show-hidden-content": "", "link-button-url": "", "link-button-new-tab": "", "yrm-button-opacity": "1", "yrm-cursor": "pointer", "more-button-title": "Xem th\u00eam", "more-title": "", "less-button-title": "Less more", "less-title": "", "add-button-next-content": "", "yrm-btn-font-weight": "bold", "yrm-animate-easings": "swing", "attrMoreName": "Xem th\u00eam", "attrLessName": "\u0110\u00f3ng l\u1ea1i" }</script>
+    <script type="text/javascript">yrmAddEvent(window, "load", function () { var obj = new YrmInline(); obj.id = 1; obj.init(); });</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <script type="text/javascript" class="yrm-custom-script"></script>
+    <script type='text/javascript' id='contact-form-7-js-extra'>var wpcf7 = { "apiSettings": { "root": "https:\/\/minvoice.vn\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };</script>
+    <script type='text/javascript' id='mystickymenu-js-extra'>var option = { "mystickyClass": "#masthead", "activationHeight": "5", "disableWidth": "0", "disableLargeWidth": "0", "adminBar": "false", "device_desktop": "1", "device_mobile": "1", "mystickyTransition": "fade", "mysticky_disable_down": "false" };</script>
+    <script type='text/javascript' id='vietmoz-script-js-extra'>var VIETMOZ = { "headroom": "", "m_headroom": "" };</script>
+    <script type='text/javascript' id='wpsisac-public-script-js-extra'>var Wpsisac = { "is_mobile": "0", "is_rtl": "0" };</script>
+    <script defer src="~/Content/js/autoptimize_d9333e48ffa7ecc10ee6f5179b6fbc91.js"></script>
+    <script defer src="~/Content/js/autoptimize_1c3b0444bc1322b961d9aa6922f5001d.js"></script>
+    @*<script defer="" src="https://minvoice.vn/wp-content/cache/autoptimize/js/autoptimize_37a9f6e40b5e01e4399746773eb470c7.js"></script>*@
+    <script src="~/Content/js/autoptimize_37a9f6e40b5e01e4399746773eb470c7.js"></script>
+
+
+    <script type="text/javascript">
+        //hiển thị
+        $("#dangkydungthu").click(function () {
+            $("#nf-field-102").val("");
+            $("#post-68").slideDown();
+
+        });
+        //ẩn đi
+        $("#closeform").click(function () {
+            $("#post-68").hide();
+        });
+
+        $("#muangay").click(function () {
+            $("#nf-field-102").val("");
+            $("#post-68").slideDown();
+
+        });
+        //ẩn đi
+        $("#closeform").click(function () {
+            $("#post-68").hide();
+        });
+
+
+        function hidePopup() {
+            $("#pp_full_res123").hide();
+            $("#pp_full_res123").removeClass("showpop");
+        }
+
+
+        function hidePopup1() {
+            $("#pp_full_res").hide();
+            $("#pp_full_res").removeClass("showpop");
+        }
+
+        $("#slide-0").click(function (e) {
+            $("#pp_full_res").addClass("showpop");
+            $("#pp_full_res").fadeIn();
+
+        });
+
+        $("#slide-00").click(function (e) {
+            $("#pp_full_res123").addClass("showpop");
+            $("#pp_full_res123").fadeIn();
+
+        });
+
+        //$(".vc_row.wpb_row.vc_row-fluid.vc_custom_1583425595893").removeClass("vc_hidden");
+
+        ////$(document).click(function (e) {
+        ////     Đối tượng container chứa popup
+        ////    var container = $("#fullResImage");
+
+        ////     Nếu click bên ngoài đối tượng container thì ẩn nó đi
+        ////    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        ////        $("#pp_full_res123").hide();
+        ////    }
+        ////});
+
+        //$("#slide-0").click(function () {
+        //    $("#pp_full_res").slideDown();
+
+        //});
+
+
+        $("#slide-1").click(function () {
+            $("#nf-field-102").val("M-200");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-2").click(function () {
+            $("#nf-field-102").val("M-300");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-3").click(function () {
+            $("#nf-field-102").val("M-500");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-4").click(function () {
+            $("#nf-field-102").val("M-1000");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-5").click(function () {
+            $("#nf-field-102").val("M-3000");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-6").click(function () {
+            $("#nf-field-102").val("M-5000");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-7").click(function () {
+            $("#nf-field-102").val("M-10000");
+            $("#post-68").slideDown();
+
+        });
+        $("#slide-8").click(function () {
+            $("#nf-field-102").val("M-Max");
+            $("#post-68").slideDown();
+
+        });
+        //đăng nhập show alert
+        //$("#xacnhandn").click(function () {
+        //    var taikhoan = $(".txttk").val();
+        //    var matkhau = $(".txtmk").val();
+        //    alert("Tài khoản là:" + taikhoan + "\n Mật khẩu là:" + matkhau + "");
+        //    if (taikhoan == "") {
+        //        alert("Tài khoản KHÔNG HỢP LỆ");
+        //    }
+        //});
+    </script>
+    <script type="text/javascript" id="nf-front-end-js-extra">
+        var nfi18n = { "ninjaForms": "Ninja Forms", "changeEmailErrorMsg": "H\u00e3y nh\u1eadp m\u1ed9t \u0111\u1ecba ch\u1ec9 email h\u1ee3p l\u1ec7!", "changeDateErrorMsg": "Please enter a valid date!", "confirmFieldErrorMsg": "Nh\u1eefng tr\u01b0\u1eddng n\u00e0y ph\u1ea3i kh\u1edbp!", "fieldNumberNumMinError": "L\u1ed7i s\u1ed1 t\u1ed1i thi\u1ec3u", "fieldNumberNumMaxError": "L\u1ed7i s\u1ed1 t\u1ed1i \u0111a", "fieldNumberIncrementBy": "H\u00e3y t\u0103ng theo ", "fieldTextareaRTEInsertLink": "Ch\u00e8n li\u00ean k\u1ebft", "fieldTextareaRTEInsertMedia": "Ch\u00e8n ph\u01b0\u01a1ng ti\u1ec7n", "fieldTextareaRTESelectAFile": "Ch\u1ecdn t\u1eadp tin", "formErrorsCorrectErrors": "H\u00e3y s\u1eeda l\u1ed7i tr\u01b0\u1edbc khi g\u1eedi m\u1eabu n\u00e0y.", "formHoneypot": "N\u1ebfu b\u1ea1n l\u00e0 ng\u01b0\u1eddi \u0111ang xem tr\u01b0\u1eddng n\u00e0y, h\u00e3y \u0111\u1ec3 tr\u1ed1ng n\u00f3.", "validateRequiredField": "\u0110\u00e2y l\u00e0 m\u1ed9t tr\u01b0\u1eddng b\u1eaft bu\u1ed9c.", "honeypotHoneypotError": "L\u1ed7i Honeypot", "fileUploadOldCodeFileUploadInProgress": "\u0110ang t\u1ea3i t\u1eadp tin l\u00ean.", "fileUploadOldCodeFileUpload": "T\u1ea2I T\u1eacP TIN L\u00caN", "currencySymbol": "", "fieldsMarkedRequired": "C\u00e1c tr\u01b0\u1eddng \u0111\u01b0\u1ee3c \u0111\u00e1nh d\u1ea5u <span class=\"ninja-forms-req-symbol\">*<\/span> l\u00e0 b\u1eaft bu\u1ed9c", "thousands_sep": ",", "decimal_point": ".", "siteLocale": "vi", "dateFormat": "m\/d\/Y", "startOfWeek": "1", "of": "c\u1ee7a", "previousMonth": "Previous Month", "nextMonth": "Next Month", "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "monthsShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "weekdaysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], "weekdaysMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"] };
+        var nfFrontEnd = { "adminAjax": "https:\/\/minvoice.vn\/wp-admin\/admin-ajax.php", "ajaxNonce": "a2b1e782d6", "requireBaseUrl": "https:\/\/minvoice.vn\/wp-content\/plugins\/ninja-forms\/assets\/js\/", "use_merge_tags": { "user": { "address": "address", "textbox": "textbox", "button": "button", "checkbox": "checkbox", "city": "city", "confirm": "confirm", "date": "date", "email": "email", "firstname": "firstname", "html": "html", "hidden": "hidden", "lastname": "lastname", "listcheckbox": "listcheckbox", "listcountry": "listcountry", "listimage": "listimage", "listmultiselect": "listmultiselect", "listradio": "listradio", "listselect": "listselect", "liststate": "liststate", "note": "note", "number": "number", "password": "password", "passwordconfirm": "passwordconfirm", "product": "product", "quantity": "quantity", "recaptcha": "recaptcha", "shipping": "shipping", "spam": "spam", "starrating": "starrating", "submit": "submit", "terms": "terms", "textarea": "textarea", "total": "total", "unknown": "unknown", "zip": "zip", "hr": "hr" }, "post": { "address": "address", "textbox": "textbox", "button": "button", "checkbox": "checkbox", "city": "city", "confirm": "confirm", "date": "date", "email": "email", "firstname": "firstname", "html": "html", "hidden": "hidden", "lastname": "lastname", "listcheckbox": "listcheckbox", "listcountry": "listcountry", "listimage": "listimage", "listmultiselect": "listmultiselect", "listradio": "listradio", "listselect": "listselect", "liststate": "liststate", "note": "note", "number": "number", "password": "password", "passwordconfirm": "passwordconfirm", "product": "product", "quantity": "quantity", "recaptcha": "recaptcha", "shipping": "shipping", "spam": "spam", "starrating": "starrating", "submit": "submit", "terms": "terms", "textarea": "textarea", "total": "total", "unknown": "unknown", "zip": "zip", "hr": "hr" }, "system": { "address": "address", "textbox": "textbox", "button": "button", "checkbox": "checkbox", "city": "city", "confirm": "confirm", "date": "date", "email": "email", "firstname": "firstname", "html": "html", "hidden": "hidden", "lastname": "lastname", "listcheckbox": "listcheckbox", "listcountry": "listcountry", "listimage": "listimage", "listmultiselect": "listmultiselect", "listradio": "listradio", "listselect": "listselect", "liststate": "liststate", "note": "note", "number": "number", "password": "password", "passwordconfirm": "passwordconfirm", "product": "product", "quantity": "quantity", "recaptcha": "recaptcha", "shipping": "shipping", "spam": "spam", "starrating": "starrating", "submit": "submit", "terms": "terms", "textarea": "textarea", "total": "total", "unknown": "unknown", "zip": "zip", "hr": "hr" }, "fields": { "address": "address", "textbox": "textbox", "button": "button", "checkbox": "checkbox", "city": "city", "confirm": "confirm", "date": "date", "email": "email", "firstname": "firstname", "html": "html", "hidden": "hidden", "lastname": "lastname", "listcheckbox": "listcheckbox", "listcountry": "listcountry", "listimage": "listimage", "listmultiselect": "listmultiselect", "listradio": "listradio", "listselect": "listselect", "liststate": "liststate", "note": "note", "number": "number", "password": "password", "passwordconfirm": "passwordconfirm", "product": "product", "quantity": "quantity", "recaptcha": "recaptcha", "shipping": "shipping", "spam": "spam", "starrating": "starrating", "submit": "submit", "terms": "terms", "textarea": "textarea", "total": "total", "unknown": "unknown", "zip": "zip", "hr": "hr" }, "calculations": { "html": "html", "hidden": "hidden", "note": "note", "unknown": "unknown" } }, "opinionated_styles": "" };</script>
+</body>
+</html>

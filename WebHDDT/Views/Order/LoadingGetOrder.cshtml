@@ -1,0 +1,831 @@
+﻿
+@{
+    Layout = null;
+}
+@using WebHDDT.Models
+@model IEnumerable<ctthongbao>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Loading...</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="~/Content/img/logo-app-02.png">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>*@
+
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />*@
+    <link href="~/Content/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous" />*@
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+
+    <script src="~/Content/js/jquery.min.js"></script>
+
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+    @*<script src="~/Content/jquery.min.js"></script>*@
+
+    <style>
+        .loadingDiv-parent {
+            position: fixed;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            z-index: 999998;
+        }
+
+
+
+        .loadingDiv .loading-image {
+            display: block;
+            margin: 25px 75px;
+        }
+
+        .img {
+            color: black;
+            line-height: 50px;
+            font-size: 30px;
+            background: red;
+            border: 3px solid #000;
+            border-radius: 50%;
+            position: absolute;
+            animation: combined 3s linear;
+            -webkit-animation: combined 3s linear;
+            left: 0;
+            top: 0;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        @@keyframes combined {
+            16%, 48%, 78% {
+                top: 150px;
+                animation-timing-function: ease-out;
+            }
+
+            32% {
+                top: 50px;
+                animation-timing-function: ease-in;
+            }
+
+            62% {
+                top: 100px;
+                animation-timing-function: ease-in;
+            }
+
+            95% {
+                top: 150px;
+                animation-timing-function: ease-in;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                top: 190px;
+                animation-timing-function: ease-out;
+                left: 45%;
+            }
+        }
+
+        @@-webkit-keyframes combined {
+            16%, 48%, 78% {
+                top: 150px;
+                -webkit-animation-timing-function: ease-out;
+            }
+
+            32% {
+                top: 50px;
+                -webkit-animation-timing-function: ease-in;
+            }
+
+            62% {
+                top: 100px;
+                -webkit-animation-timing-function: ease-in;
+            }
+
+            95% {
+                top: 150px;
+                -webkit-animation-timing-function: ease-in;
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                top: 190px;
+                -webkit-animation-timing-function: ease-out;
+                left: 45%;
+                /*transform:translateX(-50%);*/
+            }
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 6%;
+        }
+
+        .loading__letter {
+            font-size: 65px;
+            font-weight: normal;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: "Audiowide";
+            color: black;
+        }
+
+        @@keyframes bounce {
+            0% {
+                transform: translateY(0px);
+            }
+
+            40% {
+                transform: translateY(-40px);
+            }
+
+            80%,
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .loading__letter {
+            font-size: 65px;
+            font-weight: normal;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation-name: bounce;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+            .loading__letter:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+
+            .loading__letter:nth-child(3) {
+                animation-delay: 0.2s;
+            }
+
+            .loading__letter:nth-child(4) {
+                animation-delay: 0.3s;
+            }
+
+            .loading__letter:nth-child(5) {
+                animation-delay: 0.4s;
+            }
+
+            .loading__letter:nth-child(6) {
+                animation-delay: 0.5s;
+            }
+
+            .loading__letter:nth-child(7) {
+                animation-delay: 0.6s;
+            }
+
+            .loading__letter:nth-child(8) {
+                animation-delay: 0.8s;
+            }
+
+            .loading__letter:nth-child(9) {
+                animation-delay: 1s;
+            }
+
+            .loading__letter:nth-child(10) {
+                animation-delay: 1.2s;
+            }
+
+            .loading__letter:nth-child(11) {
+                animation-delay: 1.4s;
+            }
+
+            .loading__letter:nth-child(12) {
+                animation-delay: 1.6s;
+            }
+
+            .loading__letter:nth-child(13) {
+                animation-delay: 1.8s;
+            }
+
+
+        #popup_mst {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 999999;
+            opacity: 1;
+        }
+
+        #contentpopup_mst {
+            width: 50%;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            border: 5px solid red;
+            background-color: white;
+            z-index: 99999;
+            display: block;
+        }
+
+        #contentpopup_mst1 {
+            width: 50%;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            border: 5px solid red;
+            background-color: white;
+            z-index: 999999;
+            display: block;
+        }
+
+        @@media screen and (min-width:768px) {
+            #contentpopup_mst {
+                width: 40%;
+            }
+        }
+
+        @@media screen and (min-width:768px) {
+            #contentpopup_mst1 {
+                width: 25%;
+            }
+        }
+
+        .modal-header {
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: 0.3rem;
+            border-top-right-radius: 0.3rem;
+            /* display: -webkit-box; */
+            display: flex;
+            -webkit-box-align: start;
+            align-items: center;
+        }
+
+        button {
+            background-color: #298fcd;
+            border-radius: 2px;
+            letter-spacing: 0px;
+            display: inline-block;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+            text-decoration: none;
+            transition: all .3s ease;
+            user-select: none;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: visible;
+            opacity: unset !important;
+        }
+
+            button:hover, button:focus, input[type=button]:hover, input[type=button]:focus, input[type=reset]:hover, input[type=reset]:focus, input[type=submit]:hover, input[type=submit]:focus, .button:hover, .button:focus, .btn:hover, .btn:focus {
+                background-color: #ed2227;
+                color: #fff;
+                border-color: #ed2227;
+            }
+    </style>
+</head>
+<body>
+    <div class="loadingDiv-parent" style="background-image: url(../Content/img/minvoiceloading.jpg); background-size: cover;background-repeat: no-repeat; background-position: center;    display: flex; justify-content: center; align-items: center;">
+
+
+        <div class="loadingDiv" style="width: 100%;height: 100%;z-index: 9999999; position:fixed;display: none;justify-content: center;align-items: center;">
+
+            <div class="card border-success" style="text-align: center;">
+                <div class="card-header">
+                    <img class="img img-fluid" src="~/Content/img/logo-app-02.png" alt="Hóa đơn điện tử M-invoice" style="width: 9%; border: 2px solid white; box-shadow: brown;border-radius: 50%;" />
+                    <div class="loading">
+                        <div class="loading__letter">p</div>
+                        <div class="loading__letter">l</div>
+                        <div class="loading__letter">e</div>
+                        <div class="loading__letter">a</div>
+                        <div class="loading__letter">s</div>
+                        <div class="loading__letter">e</div>
+                        <div class="loading__letter">&#160;</div>
+                        <div class="loading__letter">w</div>
+                        <div class="loading__letter">a</div>
+                        <div class="loading__letter">i</div>
+                        <div class="loading__letter">t</div>
+                        <div class="loading__letter">.</div>
+                        <div class="loading__letter">.</div>
+                        <div class="loading__letter">.</div>
+                    </div>
+                    @*  <h3 class="panel-title" style="font-weight:bold;">Đang xuất hóa đơn ... Vui lòng chờ....</h3>*@
+                </div>
+                <div class="card-body">
+                    <i class="fa fa-sync fa-pulse" style="font-size:7em;" aria-hidden="true"></i>
+                    <span id="panelclose_btn"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="popup_mst" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
+        @if (Session["user_information"] != null)
+        {
+            User_info user = (User_info)Session["user_information"];
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="contentpopup_mst">
+
+                    <div class="modal-header">
+
+                        <h5 class="modal-title" id="exampleModalLabel">Xin chào <b>@user.name</b> vui lòng chọn dải hóa đơn điện tử cần xuất!</h5>
+
+                        <button type="button" class="close" id="close_mst" data-dismiss="modal" aria-label="Close" style="padding: 5px 13px;height: 100%; margin-top: auto; margin-bottom: auto;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="padding: 10px; display:inline-block; text-align:left;">
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label for="inputState">Mẫu số - Ký hiệu:</label>
+                                    <select id="select_mauso" class="form-control">
+                                        @{int i = 0;
+
+                                            foreach (var item in Model)
+                                            {
+                                                i++;
+                                                if (@item.value.Contains("-") == false)
+                                                {
+                                                    <option data-kyhieu="@item.ky_hieu" data-mauso="@item.mau_so" data-soluong="@item.so_luong" data-count="@i" data-tuso="@item.tu_so" data-denso="@item.den_so" data-ngaybdsd="@item.ngay_bd_sd" data-id="@item.ctthongbao_id" value="@(item.mau_so + " - " + item.ky_hieu)">@(item.mau_so + " - " + item.ky_hieu)</option>
+                                                }
+                                                else
+                                                {
+                                                    <option data-kyhieu="@item.ky_hieu" data-mauso="@item.mau_so" data-soluong="@item.so_luong" data-count="@i" data-tuso="@item.tu_so" data-denso="@item.den_so" data-ngaybdsd="@item.ngay_bd_sd" data-id="@item.ctthongbao_id" value="@item.value">@item.value</option>
+                                                }
+
+                                            }
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Ngày bắt đầu sử dụng:</label>
+                                    <input type="text" value="" id="ngaybdsd" name="ngaybdsd" class="form-control" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="recipient-name" class="col-form-label">Số lượng:</label>
+                                    <input type="text" value="" id="soluong" name="soluong" class="form-control" readonly="readonly" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="recipient-name" class="col-form-label">Từ số:</label>
+                                    <input type="text" value="" id="tuso" name="tuso" class="form-control" readonly="readonly" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="recipient-name" class="col-form-label">Đến số:</label>
+                                    <input type="text" value="" id="denso" name="denso" class="form-control" readonly="readonly" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer" style="padding: 10px 10px ; text-align:center; display:flex; justify-content:space-between;align-items:center;">
+
+                            <input type="button" class="btn btn-primary" id="send_invoice" value="Xác nhận">
+                            <div class="form-group col-md-4">
+                                <label for="recipient-name" class="col-form-label">Lấy ký hiệu mới:</label>
+                                <input type="button" class="btn btn-warning fa" id="update_invoice" value="&#xf01e;">
+                            </div>
+                        </div>
+</form>
+                </div>
+            </div>
+                                            }
+        @if (Session["error"] != null)
+        {
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="contentpopup_mst1">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Vui lòng nhập lại thông tin đăng nhập trang hóa đơn M-invoice!</h5>
+                        <button type="button" class="close" id="close_login" data-dismiss="modal" aria-label="Close" style="padding: 5px 13px;height: 100%; margin-top: auto; margin-bottom: auto;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="padding: 10px; display:inline-block; text-align:left;">
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Mã số thuế:</label>
+                                <input type="text" class="form-control" required="" placeholder="Gồm 10 hoặc 13 số" id="_mst">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Tài khoản:</label>
+                                <input type="text" class="form-control" placeholder="Nhập tài khoản" id="_user" />
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Mật khẩu:</label>
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="_pass" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer" style="padding: 10px 10px ; text-align:center;">
+
+                            <input type="button" class="btn btn-primary" id="send_mst" value="Xác nhận">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+   
+
+    <script>
+        $(document).ready(function () {
+            if ('@Session["no_userinfo"]' == "no_user") {
+                alert('Bạn chưa cài app M-invoice trên Haravan nên không thể thực hiện xuất hóa đơn điện tử!');
+            }
+            $('.loadingDiv').hide();
+            debugger;
+                        var session_err = '@Session["error"]';
+                        var session_userinfor = '@Session["user_information"]';
+                        if (session_err == "error") {
+                            $('#popup_mst').fadeIn();
+                            $('#contentpopup_mst').show();
+                        }
+
+             var session_org = '@Session["org"]';
+            var session_id = '@Session["id"]';
+
+            $('#send_mst').click(function () {
+                            var mst1 = $('#_mst').val();
+
+                            //
+                            debugger;
+                            if (mst1.includes("-") == true) {
+                                mst1 = mst1.replace("-", "");
+                            }
+                            var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+                // kiểm tra mst hợp lệ không ?
+                if (filter.test(mst1)) {
+                    if (mst1.length == 10 || mst1.length == 13) {
+                        var validate = true;
+                    } else {
+                        alert('Vui lòng nhập vào đúng mã số thuế 10 hoặc 13 ký tự!!!');
+                         var validate = false;
+                    }
+                }
+                else {
+                    alert('Vui lòng nhập vào đúng mã số thuế!!!');
+                        var validate = false;
+                }
+				if (mst1 == "demohoadon") { var validate = true;}
+                var _user = $('#_user').val();
+                var _pass = $('#_pass').val();
+
+                if (_user.length == 0 || _pass.length == 0) {
+
+                    alert('Vui lòng nhập tài khoản và mật khẩu!!!');
+                    var validate = false;
+                }
+                if (validate) {
+                    debugger;
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/Check_MST",
+                        dataType: "json",
+                        data: { mst: mst1, username: _user, password: _pass }
+                    }).done(function (result) {
+            // check session có không ?
+                        if (result == "") {
+                            // không có session
+                            $('#contentpopup_mst').hide();
+                            $('#popup_mst').fadeOut();
+                            //alert(); đăng nhập lại app
+                            window.location.href = '@Url.Action("Login", "Install")?orgid=' + session_org;
+
+
+                        }
+                        // có session
+                        else {
+                            $.ajax({
+                                type: "POST",
+                                url: "https://" + result + ".minvoice.com.vn/api/Account/Login",
+                                contentType: "application/x-www-form-urlencoded",
+                                data: { username: _user, password: _pass, ma_dvcs: "VP" },
+                                dataType: "json"
+                            }).done(function (result1) {
+                                debugger;
+                                // login thành công
+                                if (result1.token != "" && result1.token != undefined) {
+                                    //add data vào database
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/Home/Check_Link",
+
+                                        data: { link: "https://" + result + ".minvoice.com.vn" }
+                                    }).done(function (result) {
+
+                                        if (result == "") {
+                                            // không có session
+                                            //$('#contentpopup_mst').hide();
+                                            //$('#popup_mst').fadeOut();
+                                            //alert("");
+                                        }
+                                        else {
+                                            // đăng nhập thành công
+                                        }
+
+                                    }).fail(function () {
+                                        debugger;
+                                        //$('#popup_mst').fadeOut();
+                                        //$('#contentpopup_mst').hide();
+                                    });
+                                    //redirect đến trang hóa đơn
+                                    //window.location.href = "https://" + result + ".minvoice.com.vn";
+                                    debugger;
+                                    alert("Đăng nhập thành công!!!");
+                                    $('#contentpopup_mst1').hide();
+                                    $('#popup_mst').fadeOut();
+                                    location.reload();
+                                }
+                                else {
+                                    debugger;
+                                    // sai tài khoản hoặc mật khẩu?
+
+                                    alert(result1.error + " Vui lòng kiểm tra lại!");
+                                    //$('#popup_mst').fadeOut();
+                                    //$('#contentpopup_mst').hide();
+                                }
+
+
+                                // kết nối k ổn định
+                            }).fail(function (result1) {
+                                //alert('fail rồi');
+                                debugger;
+                                if (result1.status == 500) {
+                                    debugger;
+                                    console.log(result1.Message);
+                                    alert("Mã số thuế này chưa phát hành hóa đơn điện tử , hoặc chưa được kích hoạt!!");
+                                }
+
+                            });
+                        }
+                    }).fail(function (result) {
+                                        alert('Oh no :(');
+                                        $('#popup_mst').fadeOut();
+                                        $('#contentpopup_mst').hide();
+                    });
+                }
+
+
+
+
+
+            });
+
+            setInterval(function () {
+                $('.img').css("position","unset")
+            }, 3000);
+
+            $('#close_mst').click(function () {
+                $('#popup_mst').fadeOut();
+                $('#contentpopup_mst').hide();
+            });
+            $('#popup_mst').click(function (e) {
+                $('#popup_mst').fadeOut();
+                $('#contentpopup_mst1').hide();
+             });
+            $('#close_login').click(function () {
+                $('#popup_mst').fadeOut();
+                $('#contentpopup_mst1').hide();
+            });
+            //$('select').find('option[data-count=1]').attr('selected', 'selected');
+
+
+
+                $("#select_mauso option").filter(function () {
+                    return $(this).val() == $("#soluong").val();
+                }).attr('selected', true);
+
+                $("#soluong").val($(this).find("option:selected").attr("data-soluong"));
+                $("#tuso").val($(this).find("option:selected").attr("data-tuso"));
+                $("#denso").val($(this).find("option:selected").attr("data-denso"));
+                $("#ngaybdsd").val($(this).find("option:selected").attr("data-ngaybdsd"));
+
+            $("body").on("change","#select_mauso",function () {
+
+                    //var id = $(this).find("option:selected").attr("data-id");
+
+                    $("#soluong").val($(this).find("option:selected").attr("data-soluong"));
+                    $("#tuso").val($(this).find("option:selected").attr("data-tuso"));
+                    $("#denso").val($(this).find("option:selected").attr("data-denso"));
+                    $("#ngaybdsd").val($(this).find("option:selected").attr("data-ngaybdsd"));
+
+            });
+
+            //lấy dải hđ mới
+            $("#update_invoice").click(function () {
+                debugger;
+                var user_info = '@Session["user_information"]';
+                var _user = user_info.username;
+                var _pass = $('#_pass').val();
+                var _mst = user_info.mst;
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://" + result + ".minvoice.com.vn/api/Account/Login",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: { username: _user, password: _pass, ma_dvcs: "VP" },
+                    dataType: "json"
+                }).done(function (result1) {
+                    debugger;
+                    // login thành công
+                    if (result1.token != "" && result1.token != undefined) {
+                        //add data vào database
+                        $.ajax({
+                            type: "POST",
+                            url: "/Home/Check_Link",
+
+                            data: { link: "https://" + result + ".minvoice.com.vn" }
+                        }).done(function (result) {
+
+                            if (result == "") {
+                                // không có session
+                                //$('#contentpopup_mst').hide();
+                                //$('#popup_mst').fadeOut();
+                                //alert("");
+                            }
+                            else {
+                                // đăng nhập thành công
+                            }
+
+                        }).fail(function () {
+                            debugger;
+                            //$('#popup_mst').fadeOut();
+                            //$('#contentpopup_mst').hide();
+                        });
+                        //redirect đến trang hóa đơn
+                        //window.location.href = "https://" + result + ".minvoice.com.vn";
+                        debugger;
+                        alert("Đăng nhập thành công!!!");
+                        $('#contentpopup_mst1').hide();
+                        $('#popup_mst').fadeOut();
+                        location.reload();
+                    }
+                    else {
+                        debugger;
+                        // sai tài khoản hoặc mật khẩu?
+
+                        alert(result1.error + " Vui lòng kiểm tra lại!");
+                        //$('#popup_mst').fadeOut();
+                        //$('#contentpopup_mst').hide();
+                    }
+
+
+                    // kết nối k ổn định
+                }).fail(function (result1) {
+                    //alert('fail rồi');
+                    debugger;
+                    if (result1.status == 500) {
+                        debugger;
+                        console.log(result1.Message);
+                        alert("Mã số thuế này chưa phát hành hóa đơn điện tử , hoặc chưa được kích hoạt!!");
+                    }
+
+                });
+            });
+            //xuất hóa đơn
+                $("#send_invoice").click(function () {
+                  if ($("#select_mauso option").attr("value") == undefined) {
+                             alert("Vui lòng chọn dải hóa đơn!");
+                  }
+                  else {
+                    debugger;
+                    var session_org = '@Session["org"]';
+                   
+
+                    var invoicecode_id = $("#select_mauso").find("option:selected").attr("data-id");
+                    var series = $("#select_mauso").find("option:selected").attr("data-kyhieu");
+                    var mau_hd = $("#select_mauso").find("option:selected").attr("data-mauso");
+
+
+                    if (session_org != "" && session_id != "") {
+
+                        window.location.href = '@Url.Action("GetOrderDetails", "Install")?orgid=' + session_org + '&id=' + session_id + '&inv_invoicecode_id=' + invoicecode_id + '&inv_invoiceseries=' + series + '&mau_so=' + mau_hd;
+
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "/Install/GetOrderDetails",
+                        //    data: { orgid: session_org, id: session_id, inv_invoicecode_id: invoicecode_id, inv_invoiceseries: series, mau_so: mau_hd },
+                        //    dataType: "json"
+                        //}).done(function (result1) {
+                        //    debugger;
+                        //    // login thành công
+                        //    if (result1.token != "" && result1.token != undefined) {
+                        //        //add data vào database
+                        //        $.ajax({
+                        //            type: "POST",
+                        //            url: "/Home/Check_Link",
+
+                        //            data: { link: "https://" + result + ".minvoice.com.vn" }
+                        //        }).done(function (result) {
+
+                        //            if (result == "") {
+                        //                // không có session
+                        //                $('#contentpopup_mst').hide();
+                        //                $('#popup_mst').fadeOut();
+
+                        //            } else {
+
+                        //            }
+
+                        //        }).fail(function () {
+                        //            debugger;
+                        //            $('#popup_mst').fadeOut();
+                        //            $('#contentpopup_mst').hide();
+                        //        });
+                        //        //redirect đến trang hóa đơn
+                        //        window.location.href = "https://" + result + ".minvoice.com.vn";
+
+                        //    }
+                        //    else {
+                        //        debugger;
+                        //        // sai tài khoản hoặc mật khẩu?
+
+                        //        alert(result1.error + "Vui lòng kiểm tra lại!");
+                        //        //$('#popup_mst').fadeOut();
+                        //        //$('#contentpopup_mst').hide();
+                        //    }
+
+
+                        //    // kết nối k ổn định
+                        //}).fail(function (result1) {
+                        //    //alert('fail rồi');
+                        //    debugger;
+                        //    if (result1.status == 500) {
+                        //        debugger;
+                        //        console.log(result1.Message);
+                        //        alert("Mã số thuế này chưa phát hành hóa đơn điện tử , hoặc chưa được kích hoạt!!");
+                        //    }
+
+                        //});
+                        }
+                    }
+                });
+
+            $(".loadingDiv-parent").css('display', 'flex');
+
+            @*var session_org = '@Session["org"]';
+            var session_id = '@Session["id"]';*@
+
+            if (session_org != "" && session_id != "") {
+
+                //window.location.href = '@Url.Action("GetOrderDetails", "Install")?orgid=' + session_org +'&id='+ session_id ;
+                //$.ajax({
+                //    type: 'POST',
+                //    crossDomain: true,
+                //    url: '/Install/GetOrderDetails',
+                //    data: '{ orgid: "'+session_org+'", id:"'+ session_id+'" }',
+                //    dataType: 'jsonp',
+                //    contentType: "application/json; charset=utf-8",
+                //    success: function (response) {
+                //        alert('thành công');
+                //        if (response.status === 200) {
+                //            debugger;
+                //            // login thành công
+                //            alert('thành công');
+                //        } else {
+                //            alert('thành công, nhưng k phải 200');
+                //        }
+                //    },
+                //    error: function (response) {
+
+                //        var strData = JSON.stringify(response);
+                //        console.log(strData);
+
+                //        //window.location = response;
+                //        console.log(response.statusText);
+                //        console.log(response.statusCode());
+                //        console.log(response.redirect);
+                //        console.log(response.state());
+                //        console.log(response.data);
+                //        alert('fail rồi');
+                //    }
+
+
+                //});
+            }
+
+        });
+
+        //$(window).on('beforeunload', function () {
+        //$(".loadingDiv-parent").fadeOut(slow);
+        //});
+    </script>
+
+</body>
+</html>
