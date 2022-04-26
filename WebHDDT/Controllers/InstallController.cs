@@ -1082,7 +1082,7 @@ namespace WebHDDT.Controllers
 
 
                                             }
-                                            if (resultResponse.ContainsKey("message"))
+                                            else
                                             {
                                                 // update tags lên đơn hàng trên Haravan 
                                                 // thêm số hđ, mẫu số, ký hiệu hdđt lên số đơn hàng haravan
