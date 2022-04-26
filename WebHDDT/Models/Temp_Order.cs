@@ -20,5 +20,6 @@ namespace WebHDDT.Models
         public string inv_invoicecode_id { get; set; }
         public string inv_invoiceseries { get; set; }
         public string mau_so { get; set; }
+        public Nullable<bool> tt78 { get; set; }
     }
 }

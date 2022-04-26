@@ -42,6 +42,8 @@ namespace WebHDDT.Controllers
         private static string username = ConfigurationManager.AppSettings["username"];
         private static string pass = ConfigurationManager.AppSettings["pass"];
         private static string ma_dvcs = ConfigurationManager.AppSettings["ma_dvcs"];
+        private static string url_save = ConfigurationManager.AppSettings["URL_SAVE"];
+        private static string url_login = ConfigurationManager.AppSettings["URL_LOGIN"];
 
         public string mst = "";
 
@@ -146,6 +148,10 @@ namespace WebHDDT.Controllers
                             Session["link"] = null;
                             Session["mst"] = null;
                             Session["id_order"] = null;
+                            Session["user_mst"] = null;
+                            Session["user_username"] = null;
+                            Session["user_password"] = null;
+                            Session["authorize"] = null;
                         }
                     }
                     // orgid null thì xét tiếp
@@ -252,6 +258,10 @@ namespace WebHDDT.Controllers
                     Session["link"] = null;
                     Session["mst"] = null;
                     Session["id_order"] = null;
+                    Session["user_mst"] = null;
+                    Session["user_username"] = null;
+                    Session["user_password"] = null;
+                    Session["authorize"] = null;
                     // xoa het thong tin 
                 }
             }
@@ -387,7 +397,7 @@ namespace WebHDDT.Controllers
                                 // nếu có id đơn hàng , đưa về action lấy chi tiết đơn hàng
                                 //Session["id_order"];
                                 //return RedirectToAction("LoadingGetOrder", "Order", new { orgid = orgid1, id = check_order.ToString() });
-                                return RedirectToAction("GetOrderDetails", new { orgid = orgid1, id = check_order.id_order.ToString() , inv_invoicecode_id =check_order.inv_invoicecode_id.ToString(), inv_invoiceseries=check_order.inv_invoiceseries.ToString(), mau_so=check_order.mau_so.ToString() });
+                                return RedirectToAction("GetOrderDetails", new { orgid = orgid1, id = check_order.id_order.ToString() , inv_invoicecode_id =check_order.inv_invoicecode_id.ToString(), inv_invoiceseries=check_order.inv_invoiceseries.ToString(), mau_so=check_order.mau_so.ToString(), tt78= check_order.tt78 });
                             }
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //User_info data_mst = db.User_info.SingleOrDefault(n => n.orgid == orgid1);
@@ -856,7 +866,7 @@ namespace WebHDDT.Controllers
         }
 
 
-        public async Task<bool> Add_TemOrder(string orgid, string id, string inv_invoicecode_id, string inv_invoiceseries, string mau_so)
+        public async Task<bool> Add_TemOrder(string orgid, string id, string inv_invoicecode_id, string inv_invoiceseries, string mau_so, bool tt78)
         {
             //add id_order vô bảng tạm
             //await Task.Run();
@@ -871,8 +881,9 @@ namespace WebHDDT.Controllers
                     inv_invoicecode_id = inv_invoicecode_id,
                     inv_invoiceseries = inv_invoiceseries,
                     mau_so = mau_so,
-                    date_add = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss"))
-            };
+                    date_add = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
+                    tt78 = tt78
+                };
                 db.Temp_Order.Add(temp);
                 db.SaveChanges();
                 return true;
@@ -883,7 +894,7 @@ namespace WebHDDT.Controllers
         }
 
         // nhận thông tin về id của đơn hàng và get chi tiết đơn hàng
-        public async Task<ActionResult> GetOrderDetails(string orgid, string id, string inv_invoicecode_id, string inv_invoiceseries, string mau_so)
+        public async Task<ActionResult> GetOrderDetails(string orgid, string id, string inv_invoicecode_id, string inv_invoiceseries, string mau_so, bool tt78)
         {
 
             if (!string.IsNullOrWhiteSpace(orgid) && !string.IsNullOrWhiteSpace(id))
@@ -989,7 +1000,8 @@ namespace WebHDDT.Controllers
                                         //    inv_invoicecode_id = ctthongbao_id;
 
                                         //}
-                                        var jObjectData = await WebHDDT.Models.JsonConvert.ConvertData(note_order, mau_so, inv_invoiceseries, inv_invoicecode_id);
+                                        ///////////////////////tt78
+                                        var jObjectData = await WebHDDT.Models.JsonConvert.ConvertData(note_order, mau_so, inv_invoiceseries, inv_invoicecode_id,tt78);
 
                                         //var rsult = webClient.(URL_CallBack,);
                                         //var jObjectData = await WebHDDT.Models.JsonConvert.ConvertData(data_api);
@@ -1013,84 +1025,172 @@ namespace WebHDDT.Controllers
                                             taxcode_1 = _userinfo.mst;
                                         }
                                         var webClient2 =  SetupWebClient(username_1, password_1, taxcode_1);
-                                        var url = $"https://{taxcode_1}.minvoice.com.vn/api/InvoiceAPI/Save";
-                                        var result = await webClient2.UploadStringTaskAsync(url, dataRequest);
-                                        var resultResponse = JObject.Parse(result);
-                                        if (resultResponse.ContainsKey("ok") && resultResponse.ContainsKey("data"))
+                                        ///////////////////////////tt78
+                                        if (tt78)
                                         {
-                                          
-                                            mes.Add("value", "" + Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH: mm:ss")) + " " + "Đã xuất hóa đơn điện tử thành công!, Số hóa đơn: " + resultResponse["data"]["inv_invoiceNumber"].ToString() + " , Mẫu số: " + resultResponse["data"]["mau_hd"].ToString() + ", Ký hiệu: " + resultResponse["data"]["inv_invoiceSeries"].ToString() + "");
-                                            note_attributes.Add(mes);
-                                            // update tags lên đơn hàng trên Haravan
-                                            var kq = await API_UpdateOrder_Haravan(orgid, id, note_attributes.ToString());
-                                            if (kq == "")
+                                           
+                                            var result = await webClient2.UploadStringTaskAsync(url_save.Replace("testapi", taxcode_1), dataRequest);
+                                            var resultResponse = JObject.Parse(result);
+                                            if (resultResponse["code"].ToString() == "00" && resultResponse["data"] != null)
                                             {
-                                                return Content("<script language='javascript' type='text/javascript'>alert('Cập nhật trạng thái xuất hóa đơn thất bại, do không tìm thấy dữ liệu đơn hàng!');  window.close();</script>");
-                                            }
-                                            if (kq == "422")
-                                            {
-                                                return Content("<script language='javascript' type='text/javascript'>alert('Đơn hàng không tồn tại');  window.close();</script>");
-                                            }
-                                            //if (kq == "OK")
-                                            //{
-                                               
-                                            //    // cập nhật thành công
-                                            //}
-                                            Export_Invoice export_invoice = new Export_Invoice()
-                                            {
-                                                orgid = orgid,
-                                                ngay_tao = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
-                                                so_don_hang = resultResponse["data"]["so_benh_an"].ToString(),
-                                                mau_so = resultResponse["data"]["mau_hd"].ToString(),
-                                                ky_hieu = resultResponse["data"]["inv_invoiceSeries"].ToString(),
-                                                inv_invoicenumber = resultResponse["data"]["inv_invoiceNumber"].ToString(),
-                                                inv_InvoiceAuth_id = resultResponse["data"]["inv_InvoiceAuth_id"].ToString(),
-                                                inv_invoicecode_id = resultResponse["data"]["inv_InvoiceCode_id"].ToString(),
-                                                json_data = jObjectMainData.ToString(),
-                                                trang_thai_xuat = "Xuất thành công!"
-                                            };
-                                            db.Export_Invoice.Add(export_invoice);
-                                            //update trạng thái hetso="1" khi đã hết số hóa đơn 
-                                            var code_id = (Guid)resultResponse["data"]["inv_InvoiceCode_id"];
-                                            ctthongbao cttb = db.ctthongbao.SingleOrDefault(n => n.ctthongbao_id == code_id && n.orgid == orgid);
-                                            if (cttb != null)
-                                            {
-                                                if (cttb.so_luong == int.Parse(resultResponse["data"]["inv_invoiceNumber"].ToString()))
+
+                                                mes.Add("value", "" + Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH: mm:ss")) + " " + "Đã xuất hóa đơn điện tử thành công!, Số hóa đơn: " + resultResponse["data"]["shdon"].ToString() + " , Ký hiệu: " + resultResponse["data"]["khieu"].ToString() + "");
+                                                note_attributes.Add(mes);
+                                                // update tags lên đơn hàng trên Haravan
+                                                var kq = await API_UpdateOrder_Haravan(orgid, id, note_attributes.ToString());
+                                                if (kq == "")
                                                 {
-                                                    cttb.hetso = "1";
+                                                    return Content("<script language='javascript' type='text/javascript'>alert('Cập nhật trạng thái xuất hóa đơn thất bại, do không tìm thấy dữ liệu đơn hàng!');  window.close();</script>");
                                                 }
+                                                if (kq == "422")
+                                                {
+                                                    return Content("<script language='javascript' type='text/javascript'>alert('Đơn hàng không tồn tại');  window.close();</script>");
+                                                }
+                                                //if (kq == "OK")
+                                                //{
+
+                                                //    // cập nhật thành công
+                                                //}
+                                                Export_Invoice export_invoice = new Export_Invoice()
+                                                {
+                                                    orgid = orgid,
+                                                    ngay_tao = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
+                                                    so_don_hang = resultResponse["data"]["sdhang"].ToString(),
+                                                    mau_so = mau_so,
+                                                    ky_hieu = resultResponse["data"]["khieu"].ToString(),
+                                                    inv_invoicenumber = resultResponse["data"]["shdon"].ToString(),
+                                                    inv_InvoiceAuth_id = resultResponse["data"]["hoadon68_id"].ToString(),
+                                                    inv_invoicecode_id = resultResponse["data"]["cctbao_id"].ToString(),
+                                                    json_data = jObjectMainData.ToString(),
+                                                    trang_thai_xuat = "Xuất thành công!"
+                                                };
+                                                db.Export_Invoice.Add(export_invoice);
+                                                //update trạng thái hetso="1" khi đã hết số hóa đơn TT78 BỎ
+                                                //var code_id = (Guid)resultResponse["data"]["inv_InvoiceCode_id"];
+                                                //ctthongbao cttb = db.ctthongbao.SingleOrDefault(n => n.ctthongbao_id == code_id && n.orgid == orgid);
+                                                //if (cttb != null)
+                                                //{
+                                                //    if (cttb.so_luong == int.Parse(resultResponse["data"]["inv_invoiceNumber"].ToString()))
+                                                //    {
+                                                //        cttb.hetso = "1";
+                                                //    }
+                                                //}
+                                                db.SaveChanges();
+
+
+                                                return Content("<script language='javascript' type='text/javascript'>alert('Xuất hóa đơn thành công!'); window.close(); window.location.href ='https://" + taxcode_1 + ".minvoice.com.vn'</script>");
+
+
                                             }
-                                            db.SaveChanges();
-
-
-                                            return Content("<script language='javascript' type='text/javascript'>alert('Xuất hóa đơn thành công!'); window.close(); window.location.href ='https://" + taxcode_1 + ".minvoice.com.vn'</script>");
-
-
-                                        }
-                                        if (resultResponse.ContainsKey("error"))
-                                        {
-                                            // update tags lên đơn hàng trên Haravan 
-                                            // thêm số hđ, mẫu số, ký hiệu hdđt lên số đơn hàng haravan
-                                            mes.Add("value", "" + Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH: mm:ss")) + " " + "Xuất hóa đơn điện tử thất bại!, Nguyên nhân: " + "'" + "" + resultResponse["error"] + "" + "'" + "");
-                                            note_attributes.Add(mes);
-
-                                            var kq = await API_UpdateOrder_Haravan(orgid, id, note_attributes.ToString());
-
-                                            Export_Invoice export_invoice = new Export_Invoice()
+                                            if (resultResponse.ContainsKey("message"))
                                             {
-                                                orgid = orgid,
-                                                ngay_tao = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
-                                                so_don_hang = !string.IsNullOrEmpty(note_order["id"].ToString()) ? note_order["id"].ToString() : "",
-                                                mau_so = mau_so,
-                                                ky_hieu = inv_invoiceseries,
-                                                inv_invoicecode_id = inv_invoicecode_id,
-                                                json_data = jObjectMainData.ToString(),
-                                                trang_thai_xuat = "Xuất thất bại!"
-                                            };
-                                            db.Export_Invoice.Add(export_invoice);
-                                            db.SaveChanges();
-                                            return Content("<script language='javascript' type='text/javascript'>alert('Xuất hóa đơn thất bại do " + resultResponse["error"] + "!'); window.close(); window.close();</script>");
+                                                // update tags lên đơn hàng trên Haravan 
+                                                // thêm số hđ, mẫu số, ký hiệu hdđt lên số đơn hàng haravan
+                                                mes.Add("value", "" + Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH: mm:ss")) + " " + "Xuất hóa đơn điện tử thất bại!, Nguyên nhân: " + "'" + "" + resultResponse["message"] + "" + "'" + "");
+                                                note_attributes.Add(mes);
+
+                                                var kq = await API_UpdateOrder_Haravan(orgid, id, note_attributes.ToString());
+
+                                                Export_Invoice export_invoice = new Export_Invoice()
+                                                {
+                                                    orgid = orgid,
+                                                    ngay_tao = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
+                                                    so_don_hang = !string.IsNullOrEmpty(note_order["id"].ToString()) ? note_order["id"].ToString() : "",
+                                                    mau_so = mau_so,
+                                                    ky_hieu = inv_invoiceseries,
+                                                    inv_invoicecode_id = inv_invoicecode_id,
+                                                    json_data = jObjectMainData.ToString(),
+                                                    trang_thai_xuat = "Xuất thất bại!"
+                                                };
+                                                db.Export_Invoice.Add(export_invoice);
+                                                db.SaveChanges();
+                                                return Content("<script language='javascript' type='text/javascript'>alert('Xuất hóa đơn thất bại do " + resultResponse["message"] + "!'); window.close(); window.close();</script>");
+                                            }
+
                                         }
+                                        else //TT32
+                                        {
+                                            var url = $"https://{taxcode_1}.minvoice.com.vn/api/InvoiceAPI/Save";
+                                            var result = await webClient2.UploadStringTaskAsync(url, dataRequest);
+                                            var resultResponse = JObject.Parse(result);
+                                            if (resultResponse.ContainsKey("ok") && resultResponse.ContainsKey("data"))
+                                            {
+
+                                                mes.Add("value", "" + Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH: mm:ss")) + " " + "Đã xuất hóa đơn điện tử thành công!, Số hóa đơn: " + resultResponse["data"]["inv_invoiceNumber"].ToString() + " , Mẫu số: " + resultResponse["data"]["mau_hd"].ToString() + ", Ký hiệu: " + resultResponse["data"]["inv_invoiceSeries"].ToString() + "");
+                                                note_attributes.Add(mes);
+                                                // update tags lên đơn hàng trên Haravan
+                                                var kq = await API_UpdateOrder_Haravan(orgid, id, note_attributes.ToString());
+                                                if (kq == "")
+                                                {
+                                                    return Content("<script language='javascript' type='text/javascript'>alert('Cập nhật trạng thái xuất hóa đơn thất bại, do không tìm thấy dữ liệu đơn hàng!');  window.close();</script>");
+                                                }
+                                                if (kq == "422")
+                                                {
+                                                    return Content("<script language='javascript' type='text/javascript'>alert('Đơn hàng không tồn tại');  window.close();</script>");
+                                                }
+                                                //if (kq == "OK")
+                                                //{
+
+                                                //    // cập nhật thành công
+                                                //}
+                                                Export_Invoice export_invoice = new Export_Invoice()
+                                                {
+                                                    orgid = orgid,
+                                                    ngay_tao = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
+                                                    so_don_hang = resultResponse["data"]["so_benh_an"].ToString(),
+                                                    mau_so = resultResponse["data"]["mau_hd"].ToString(),
+                                                    ky_hieu = resultResponse["data"]["inv_invoiceSeries"].ToString(),
+                                                    inv_invoicenumber = resultResponse["data"]["inv_invoiceNumber"].ToString(),
+                                                    inv_InvoiceAuth_id = resultResponse["data"]["inv_InvoiceAuth_id"].ToString(),
+                                                    inv_invoicecode_id = resultResponse["data"]["inv_InvoiceCode_id"].ToString(),
+                                                    json_data = jObjectMainData.ToString(),
+                                                    trang_thai_xuat = "Xuất thành công!"
+                                                };
+                                                db.Export_Invoice.Add(export_invoice);
+                                                //update trạng thái hetso="1" khi đã hết số hóa đơn 
+                                                var code_id = (Guid)resultResponse["data"]["inv_InvoiceCode_id"];
+                                                ctthongbao cttb = db.ctthongbao.SingleOrDefault(n => n.ctthongbao_id == code_id && n.orgid == orgid);
+                                                if (cttb != null)
+                                                {
+                                                    if (cttb.so_luong == int.Parse(resultResponse["data"]["inv_invoiceNumber"].ToString()))
+                                                    {
+                                                        cttb.hetso = "1";
+                                                    }
+                                                }
+                                                db.SaveChanges();
+
+
+                                                return Content("<script language='javascript' type='text/javascript'>alert('Xuất hóa đơn thành công!'); window.close(); window.location.href ='https://" + taxcode_1 + ".minvoice.com.vn'</script>");
+
+
+                                            }
+                                            if (resultResponse.ContainsKey("error"))
+                                            {
+                                                // update tags lên đơn hàng trên Haravan 
+                                                // thêm số hđ, mẫu số, ký hiệu hdđt lên số đơn hàng haravan
+                                                mes.Add("value", "" + Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH: mm:ss")) + " " + "Xuất hóa đơn điện tử thất bại!, Nguyên nhân: " + "'" + "" + resultResponse["error"] + "" + "'" + "");
+                                                note_attributes.Add(mes);
+
+                                                var kq = await API_UpdateOrder_Haravan(orgid, id, note_attributes.ToString());
+
+                                                Export_Invoice export_invoice = new Export_Invoice()
+                                                {
+                                                    orgid = orgid,
+                                                    ngay_tao = Convert.ToDateTime(DateTime.Now.ToString("yyyy MM dd HH:mm:ss")),
+                                                    so_don_hang = !string.IsNullOrEmpty(note_order["id"].ToString()) ? note_order["id"].ToString() : "",
+                                                    mau_so = mau_so,
+                                                    ky_hieu = inv_invoiceseries,
+                                                    inv_invoicecode_id = inv_invoicecode_id,
+                                                    json_data = jObjectMainData.ToString(),
+                                                    trang_thai_xuat = "Xuất thất bại!"
+                                                };
+                                                db.Export_Invoice.Add(export_invoice);
+                                                db.SaveChanges();
+                                                return Content("<script language='javascript' type='text/javascript'>alert('Xuất hóa đơn thất bại do " + resultResponse["error"] + "!'); window.close(); window.close();</script>");
+                                            }
+
+                                        }
+                                       
 
 
                                     }
@@ -1151,12 +1251,16 @@ namespace WebHDDT.Controllers
                         Session["orgid"] = null;
                         Session["link"] = null;
                         Session["mst"] = null;
+                        Session["user_mst"] = null;
+                        Session["user_username"] = null;
+                        Session["user_password"] = null;
+                        Session["authorize"] = null;
                         // xoa het thong tin 
                     }
                 }
                 else
                 {
-                    var add_order_temp = await Add_TemOrder(orgid, id, inv_invoicecode_id,inv_invoiceseries,mau_so);
+                    var add_order_temp = await Add_TemOrder(orgid, id, inv_invoicecode_id,inv_invoiceseries,mau_so, tt78);
                     return RedirectToAction("Login", new { orgid = orgid });
                     //gọi đến action login để login, trong action login đăt 1 biến bool để ktra id của mã đơn hàng, nếu có id chuyển về action order detail tiếp
                 }
@@ -1278,7 +1382,7 @@ namespace WebHDDT.Controllers
             };
 
             //var urlLogin = BaseConfig.UrlLogin;
-            var token = client.UploadString($"https://{taxcode}.minvoice.com.vn/api/Account/Login", json.ToString());
+            var token = client.UploadString(url_login.Replace("testapi", taxcode), json.ToString());
             if (string.IsNullOrEmpty(token))
             {
                 return null;

@@ -11,6 +11,7 @@ namespace WebHDDT.Controllers
     using System.Net;
     using System.Net.Http;
     using System.Net.Mail;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
@@ -20,7 +21,7 @@ namespace WebHDDT.Controllers
     {
         Minvoice_HaravanEntities3 db = new Minvoice_HaravanEntities3();
         private static string subject = ConfigurationManager.AppSettings["subject"];
-
+        private static string url_series = ConfigurationManager.AppSettings["URL_GET_SERIES"];
 
 
         private static string FromMail = ConfigurationManager.AppSettings["FromMail"];
@@ -139,6 +140,85 @@ namespace WebHDDT.Controllers
             return View();
 
 
+        }
+        public JsonResult Check_Series(string token , string username, string password, string mst, string orgid)
+        {
+            var list_cttb = new List<ctthongbao>();
+            string id = orgid ?? "";
+            if (orgid.ToString() != "")
+            {
+                var _series = db.ctthongbao.Where(n => n.orgid == orgid.ToString());
+                //call API 78
+                var webClient = new WebClient
+                {
+                    Encoding = Encoding.UTF8
+                };
+                webClient.Headers.Add("Content-Type", "application/json; charset=utf-8");
+                var authorization = "Bear " + token + ";VP;vi";
+                webClient.Headers[HttpRequestHeader.Authorization] = authorization;
+
+                var result = webClient.DownloadString(new Uri(url_series.Replace("testapi", mst)));
+                var JOBJECT = JObject.Parse(result);
+                var resultResponse = JArray.Parse(JOBJECT["data"].ToString());
+
+                if (resultResponse.Count > 0)
+                {
+
+                    foreach (var jToken in resultResponse)
+                    {
+                        if (_series == null)
+                        {
+                            ctthongbao cttb = new ctthongbao
+                            {
+                                ky_hieu = jToken["khhdon"].ToString(),
+                                mau_so = jToken["lhdon"].ToString(),
+                                ctthongbao_id = (Guid)jToken["quanlykyhieu68_id"],
+                                so_luong = null,
+                                tu_so = null,
+                                den_so = null,
+                                ngay_bd_sd = (DateTime)jToken["date_new"],
+                                hetso = "0",
+                                orgid = orgid.ToString(),
+                                value = jToken["value"].ToString(),
+                                tt78 = true,
+                            };
+                            db.ctthongbao.Add(cttb);
+                            db.SaveChanges();
+                            list_cttb.Add(cttb);
+                        }
+                        else
+                        {
+                            string khieu = jToken["khhdon"].ToString();
+                            if (_series.Any(s => s.ky_hieu.ToString() == khieu) == false)
+                            {
+                                ctthongbao cttb = new ctthongbao
+                                {
+                                    ky_hieu = jToken["khhdon"].ToString(),
+                                    mau_so = jToken["lhdon"].ToString(),
+                                    ctthongbao_id = (Guid)jToken["quanlykyhieu68_id"],
+                                    so_luong = null,
+                                    tu_so = null,
+                                    den_so = null,
+                                    ngay_bd_sd = (DateTime)jToken["date_new"],
+                                    hetso = "0",
+                                    orgid = orgid.ToString(),
+                                    value = jToken["value"].ToString(),
+                                    tt78 = true,
+                                };
+                                db.ctthongbao.Add(cttb);
+                                db.SaveChanges();
+                                list_cttb.Add(cttb);
+                            }
+                        }
+
+
+                    }
+                    return Json(list_cttb);
+                }
+            }
+          
+
+            return Json("");
         }
         public JsonResult Check_Link(string link)
         {

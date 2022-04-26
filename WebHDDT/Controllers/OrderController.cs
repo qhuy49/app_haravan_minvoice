@@ -39,9 +39,7 @@ namespace WebHDDT.Controllers
             {
                 Session["no_userinfo"] = null;
                 Session["user_information"] = user_info;
-                Session["user_mst"] = user_info.mst;
-                Session["user_username"] = user_info.username;
-                Session["user_password"] = user_info.password;
+              
                 //var login = SetupWebClient(user_info.username,user_info.password,user_info.mst);
                 var webClient = new WebClient
                 {
@@ -54,9 +52,16 @@ namespace WebHDDT.Controllers
                 {
                     if (tokenJson.ContainsKey("token"))
                     {
+                       
                         Session["error"] = null;
                         var authorization = "Bear " + tokenJson["token"] + ";VP;vi";
                         webClient.Headers[HttpRequestHeader.Authorization] = authorization;
+
+                        Session["user_mst"] = user_info.mst;
+                        Session["user_username"] = user_info.username;
+                        Session["user_password"] = user_info.password;
+                        Session["authorize"] = authorization;
+
 
                         //select ktra có dùng 78 chưa ck
 

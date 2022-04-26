@@ -68,6 +68,7 @@
           <Property Name="inv_invoicecode_id" Type="nvarchar" MaxLength="100" />
           <Property Name="inv_invoiceseries" Type="nvarchar" MaxLength="50" />
           <Property Name="mau_so" Type="nvarchar" MaxLength="50" />
+          <Property Name="tt78" Type="bit" />
         </EntityType>
         <EntityType Name="User_info">
           <Key>
@@ -251,6 +252,7 @@
           <Property Name="inv_invoicecode_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="inv_invoiceseries" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="mau_so" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tt78" Type="Boolean" />
         </EntityType>
         <EntityType Name="ctthongbao">
           <Key>
@@ -371,6 +373,7 @@
           <EntitySetMapping Name="Temp_Order">
             <EntityTypeMapping TypeName="Minvoice_HaravanModel.Temp_Order">
               <MappingFragment StoreEntitySet="Temp_Order">
+                <ScalarProperty Name="tt78" ColumnName="tt78" />
                 <ScalarProperty Name="mau_so" ColumnName="mau_so" />
                 <ScalarProperty Name="inv_invoiceseries" ColumnName="inv_invoiceseries" />
                 <ScalarProperty Name="inv_invoicecode_id" ColumnName="inv_invoicecode_id" />

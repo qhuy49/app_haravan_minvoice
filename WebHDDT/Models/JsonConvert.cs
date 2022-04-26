@@ -157,100 +157,12 @@ namespace WebHDDT.Models
             }
         }
 
-        //public static JObject ConvertDetailJObjectSaVoucherDetail(DataRow row)
-        //{
-        //    try
-        //    {
-        //        var vatAmount = !string.IsNullOrEmpty(row["VATAmountOC"].ToString())
-        //            ? double.Parse(row["VATAmountOC"].ToString())
-        //            : 0;
-
-        //        var discountAmount = !string.IsNullOrEmpty(row["DiscountAmount"].ToString())
-        //            ? double.Parse(row["DiscountAmount"].ToString())
-        //            : 0;
-
-        //        var totalAmountWithoutVat = !string.IsNullOrEmpty(row["AmountOC"].ToString())
-        //            ? double.Parse(row["AmountOC"].ToString())
-        //            : 0;
-
-        //        var totalAmount = totalAmountWithoutVat + vatAmount - discountAmount;
-
-        //        var jObject = new JObject();
-        //        jObject.Add("inv_InvoiceAuthDetail_id", row["RefDetailID"].ToString());
-        //        jObject.Add(
-        //            "inv_InvoiceAuth_id",
-        //            !string.IsNullOrEmpty(row["SAInvoiceRefID"].ToString())
-        //                ? row["SAInvoiceRefID"].ToString()
-        //                : null
-        //        );
-        //        jObject.Add("stt_rec0", !string.IsNullOrEmpty(row["SortOrder"].ToString()) ? row["SortOrder"].ToString() : null);
-        //        jObject.Add("inv_itemCode", !string.IsNullOrEmpty(row["InventoryItemCode"].ToString()) ? row["InventoryItemCode"].ToString() : null);
-        //        jObject.Add(
-        //            "inv_itemName",
-        //            !string.IsNullOrEmpty(row["Description"].ToString()) ? row["Description"].ToString() : null
-        //        );
-        //        jObject.Add("inv_unitCode", !string.IsNullOrEmpty(row["UnitName"].ToString()) ? row["UnitName"].ToString() : null);
-        //        jObject.Add("inv_unitName", !string.IsNullOrEmpty(row["UnitName"].ToString()) ? row["UnitName"].ToString() : null);
-        //        Log.Debug(row["UnitPrice"].ToString());
-        //        Log.Debug(row["Quantity"].ToString());
-        //        Log.Debug(row["AmountOC"].ToString());
-
-        //        jObject.Add(
-        //            "inv_unitPrice",
-        //            !string.IsNullOrEmpty(row["UnitPrice"].ToString()) ? CommonService.ConvertNumber2(row["UnitPrice"].ToString()) : null
-        //        );
-        //        jObject.Add(
-        //            "inv_quantity",
-        //            !string.IsNullOrEmpty(row["Quantity"].ToString()) ? CommonService.ConvertNumber2(row["Quantity"].ToString()) : null
-        //        );
-        //        jObject.Add(
-        //            "inv_TotalAmountWithoutVat",
-        //            !string.IsNullOrEmpty(row["AmountOC"].ToString()) ? CommonService.ConvertNumber2(row["AmountOC"].ToString()) : null
-        //        );
-        //        jObject.Add(
-        //            "inv_vatPercentage",
-        //            !string.IsNullOrEmpty(row["VATRate"].ToString()) ? CommonService.ConvertNumber2(row["VATRate"].ToString()) : null
-        //        );
-        //        jObject.Add(
-        //            "inv_vatAmount",
-        //            !string.IsNullOrEmpty(row["VATAmountOC"].ToString()) ? CommonService.ConvertNumber2(row["VATAmountOC"].ToString()) : null
-        //        );
-        //        jObject.Add("inv_TotalAmount", totalAmount);
-        //        jObject.Add("inv_promotion", false);
-        //        jObject.Add(
-        //            "inv_discountPercentage",
-        //            !string.IsNullOrEmpty(row["DiscountRate"].ToString()) ? CommonService.ConvertNumber2(row["DiscountRate"].ToString()) : null
-        //        );
-        //        jObject.Add(
-        //            "inv_discountAmount",
-        //            !string.IsNullOrEmpty(row["DiscountAmount"].ToString())
-        //                ? CommonService.ConvertNumber2(row["DiscountAmount"].ToString())
-        //                : null
-        //        );
-        //        jObject.Add(
-        //            "ma_thue",
-        //            !string.IsNullOrEmpty(row["VATRate"].ToString())
-        //                ? CommonService.ConvertNumber2(row["VATRate"].ToString())
-        //                : null
-        //        );
-
-        //        Log.Debug(jObject.ToString());
-
-        //        return jObject;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.Error($"Tên hàng: {row["Description"].ToString()} --- Thứ tự: {row["SortOrder"].ToString()}");
-        //        Log.Error(ex.Message);
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
         /// <summary>
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        public static JObject ConvertDetailJObjectSaInvoiceDetail(JToken jtoken, Guid inv_InvoiceAuth_id, int count)
+        public static JObject ConvertDetailJObjectSaInvoiceDetail(JToken jtoken, Guid inv_InvoiceAuth_id, int count, bool tt78)
         {
             try
             {
@@ -287,8 +199,18 @@ namespace WebHDDT.Models
                 //jObject.Add("inv_InvoiceAuthDetail_id", row["RefDetailID"].ToString());
                 jObject.Add(
                     "inv_InvoiceAuth_id", inv_InvoiceAuth_id);
-                string stt_rec0 = count.ToString().PadLeft(8,'0');
-                jObject.Add("stt_rec0", stt_rec0);
+
+                if (tt78)
+                {
+                    jObject.Add("stt_rec0", count.ToString());
+                    jObject.Add("tchat", 1);
+                }
+                else
+                {
+                    string stt_rec0 = count.ToString().PadLeft(8, '0');
+                    jObject.Add("stt_rec0", stt_rec0);
+                }
+               
 
 
 
@@ -330,7 +252,7 @@ namespace WebHDDT.Models
             }
         }
 
-        public static async Task<JObject> ConvertData(JObject data_api, string mau_hd, string inv_invoiceseries, string inv_invoicecode_id)
+        public static async Task<JObject> ConvertData(JObject data_api, string mau_hd, string inv_invoiceseries, string inv_invoicecode_id, bool tt78)
         {
             try
             {
@@ -343,7 +265,7 @@ namespace WebHDDT.Models
                 var masterJObject = await ConvertMasterObject(data_api, mau_hd, inv_invoiceseries, inv_invoicecode_id, inv_InvoiceAuth_id);
 
                 //var SoPhieu = row["SoPhieu"].ToString();
-                var jArrayDetail = GetJArrayDetail(data_api,out inv_TotalAmount,out inv_TotalAmountWithoutVat,out inv_vatAmount,out inv_discountAmount, inv_InvoiceAuth_id);
+                var jArrayDetail = GetJArrayDetail(data_api,out inv_TotalAmount,out inv_TotalAmountWithoutVat,out inv_vatAmount,out inv_discountAmount, inv_InvoiceAuth_id, tt78);
 
 
                 masterJObject.Add("inv_TotalAmount", inv_TotalAmount);
@@ -351,26 +273,7 @@ namespace WebHDDT.Models
                 masterJObject.Add("inv_vatAmount", inv_vatAmount);
                 masterJObject.Add("inv_discountAmount", inv_discountAmount);
 
-                //if (!string.IsNullOrEmpty(row["SuaTienThue1"].ToString()) && bool.Parse(row["SuaTienThue1"].ToString()) == true)
-                //{
-
-
-                //    masterJObject.Add("inv_TotalAmountWithoutVat", inv_TotalAmountWithoutVat);
-
-                //    inv_vatAmount = !string.IsNullOrEmpty(row["TienThue"].ToString()) ? double.Parse(row["TienThue"].ToString()) : 0;
-
-                //    masterJObject.Add("inv_vatAmount", inv_vatAmount);
-
-                //    masterJObject.Add("inv_discountAmount", inv_discountAmount);
-                //    inv_TotalAmount = inv_TotalAmountWithoutVat - inv_discountAmount + inv_vatAmount;
-
-
-                //    masterJObject.Add("inv_TotalAmount", inv_TotalAmount);
-                //}
-                //else
-                //{
-
-                //}
+               
                 var data = new JObject
                 {
                     {"tab_id", "TAB00188"},
@@ -389,7 +292,7 @@ namespace WebHDDT.Models
             }
         }
 
-        private static JArray GetJArrayDetail(JObject data_api,out double inv_TotalAmount,out double inv_TotalAmountWithoutVat,out double inv_vatAmount,out double inv_discountAmount, Guid inv_InvoiceAuth_id)
+        private static JArray GetJArrayDetail(JObject data_api,out double inv_TotalAmount,out double inv_TotalAmountWithoutVat,out double inv_vatAmount,out double inv_discountAmount, Guid inv_InvoiceAuth_id, bool tt78)
         {
             inv_TotalAmount = 0.0;
             inv_TotalAmountWithoutVat = 0.0;
@@ -400,19 +303,14 @@ namespace WebHDDT.Models
 
             var line_items = JArray.Parse(data_api.GetValue("line_items").ToString());
 
-            //string whereVoucherDetail = $" WHERE SoPhieu = '{SoPhieu}' AND GianTiep=0 AND ButToanThueGTGT=0 ORDER BY STT";
-            //string sqlSelectInvoiceDetail = CommonConstants.SqlSelectSaInvoiceDetail2017;
-            //sqlSelectInvoiceDetail += whereVoucherDetail;
 
-            //var dataTableInvoiceDetail = DataContext.GetDataTableTest(sqlConnection, sqlSelectInvoiceDetail);
             if (line_items.Count > 0)
             {
                 int count = 0;
                 foreach (var item in line_items)
                 {
                     count++;
-                    //inv_vatAmount1 = !string.IsNullOrEmpty(row["TienThue"].ToString()) ? double.Parse(row["TienThue"].ToString()) : 0;
-                    var detailJObject = ConvertDetailJObjectSaInvoiceDetail(item, inv_InvoiceAuth_id,count);
+                    var detailJObject = ConvertDetailJObjectSaInvoiceDetail(item, inv_InvoiceAuth_id,count, tt78);
 
                     inv_TotalAmount += (double)detailJObject["inv_TotalAmount"];
                     inv_TotalAmountWithoutVat += (double)detailJObject["inv_TotalAmountWithoutVat"];
@@ -425,22 +323,6 @@ namespace WebHDDT.Models
                 }
 
 
-                //else
-                //{
-                //    foreach (DataRow dataRowInvoiceDetail in dataTableInvoiceDetail.Rows)
-                //    {
-
-                //        var detailJObject = ConvertDetailJObjectSaInvoiceDetail(dataRowInvoiceDetail, thue, inv_vatAmount1, suathue);
-                //        inv_TotalAmount += (double)detailJObject["inv_TotalAmount"];
-                //        inv_TotalAmountWithoutVat += (double)detailJObject["inv_TotalAmountWithoutVat"];
-                //        inv_vatAmount += (double)detailJObject["inv_vatAmount"];
-                //        inv_discountAmount += (double)detailJObject["inv_discountAmount"];
-                //        jArrayDetail.Add(detailJObject);
-
-
-
-                //    }
-                //}
             }
 
             return jArrayDetail;

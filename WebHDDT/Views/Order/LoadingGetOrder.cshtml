@@ -357,11 +357,11 @@
                                                 i++;
                                                 if (@item.value.Contains("-") == false)
                                                 {
-                                                    <option data-kyhieu="@item.ky_hieu" data-mauso="@item.mau_so" data-soluong="@item.so_luong" data-count="@i" data-tuso="@item.tu_so" data-denso="@item.den_so" data-ngaybdsd="@item.ngay_bd_sd" data-id="@item.ctthongbao_id" value="@(item.mau_so + " - " + item.ky_hieu)">@(item.mau_so + " - " + item.ky_hieu)</option>
+                                                    <option data-kyhieu="@item.ky_hieu" data-mauso="@item.mau_so" data-soluong="@item.so_luong" data-count="@i" data-tuso="@item.tu_so" data-denso="@item.den_so" data-ngaybdsd="@item.ngay_bd_sd" data-id="@item.ctthongbao_id" data-tt78="@item.tt78" value="@(item.mau_so + " - " + item.ky_hieu)">@(item.mau_so + " - " + item.ky_hieu)</option>
                                                 }
                                                 else
                                                 {
-                                                    <option data-kyhieu="@item.ky_hieu" data-mauso="@item.mau_so" data-soluong="@item.so_luong" data-count="@i" data-tuso="@item.tu_so" data-denso="@item.den_so" data-ngaybdsd="@item.ngay_bd_sd" data-id="@item.ctthongbao_id" value="@item.value">@item.value</option>
+                                                    <option data-kyhieu="@item.ky_hieu" data-mauso="@item.mau_so" data-soluong="@item.so_luong" data-count="@i" data-tuso="@item.tu_so" data-denso="@item.den_so" data-ngaybdsd="@item.ngay_bd_sd" data-id="@item.ctthongbao_id" data-tt78="@item.tt78" value="@item.value">@item.value</option>
                                                 }
 
                                             }
@@ -387,7 +387,7 @@
                                     <label for="recipient-name" class="col-form-label">Đến số:</label>
                                     <input type="text" value="" id="denso" name="denso" class="form-control" readonly="readonly" />
                                 </div>
-
+                                <input type="hidden"  id="tt78" name="tt78"/>
                             </div>
 
                         </div>
@@ -614,7 +614,8 @@
                 $("#soluong").val($(this).find("option:selected").attr("data-soluong"));
                 $("#tuso").val($(this).find("option:selected").attr("data-tuso"));
                 $("#denso").val($(this).find("option:selected").attr("data-denso"));
-                $("#ngaybdsd").val($(this).find("option:selected").attr("data-ngaybdsd"));
+            $("#ngaybdsd").val($(this).find("option:selected").attr("data-ngaybdsd"));
+            $("#tt78").val($(this).find("option:selected").attr("data-tt78"));
 
             $("body").on("change","#select_mauso",function () {
 
@@ -624,20 +625,20 @@
                     $("#tuso").val($(this).find("option:selected").attr("data-tuso"));
                     $("#denso").val($(this).find("option:selected").attr("data-denso"));
                     $("#ngaybdsd").val($(this).find("option:selected").attr("data-ngaybdsd"));
-
+                    $("#tt78").val($(this).find("option:selected").attr("data-tt78"));
             });
 
             //lấy dải hđ mới
             $("#update_invoice").click(function () {
                 debugger;
-                var user_info = '@Session["user_information"]';
-                var _user = user_info.username;
-                var _pass = $('#_pass').val();
-                var _mst = user_info.mst;
+                var authorize = '@Session["authorize"]';
+                var _user ='@Session["user_username"]';
+                var _pass ='@Session["user_password"]';
+                var _mst = '@Session["user_mst"]';
 
                 $.ajax({
-                    type: "GET",
-                    url: "https://" + result + ".minvoice.com.vn/api/Account/Login",
+                    type: "POST",
+                    url: "https://" + _mst + ".minvoice.com.vn/api/Account/Login",
                     contentType: "application/x-www-form-urlencoded",
                     data: { username: _user, password: _pass, ma_dvcs: "VP" },
                     dataType: "json"
@@ -648,19 +649,21 @@
                         //add data vào database
                         $.ajax({
                             type: "POST",
-                            url: "/Home/Check_Link",
+                            url: "/Home/Check_Series",
 
-                            data: { link: "https://" + result + ".minvoice.com.vn" }
+                            data: { token: result1.token, username: _user, password: _pass, mst: _mst, orgid: session_org }
                         }).done(function (result) {
 
                             if (result == "") {
                                 // không có session
                                 //$('#contentpopup_mst').hide();
                                 //$('#popup_mst').fadeOut();
-                                //alert("");
+                                alert("Chưa có dải ký hiệu nào mới!");
                             }
                             else {
+                                debugger;
                                 // đăng nhập thành công
+                                location.reload();
                             }
 
                         }).fail(function () {
@@ -670,11 +673,11 @@
                         });
                         //redirect đến trang hóa đơn
                         //window.location.href = "https://" + result + ".minvoice.com.vn";
-                        debugger;
-                        alert("Đăng nhập thành công!!!");
-                        $('#contentpopup_mst1').hide();
-                        $('#popup_mst').fadeOut();
-                        location.reload();
+                        //debugger;
+                        //alert("Đăng nhập thành công!!!");
+                        //$('#contentpopup_mst1').hide();
+                        //$('#popup_mst').fadeOut();
+                        //location.reload();
                     }
                     else {
                         debugger;
@@ -696,7 +699,8 @@
                         alert("Mã số thuế này chưa phát hành hóa đơn điện tử , hoặc chưa được kích hoạt!!");
                     }
 
-                });
+                    });
+
             });
             //xuất hóa đơn
                 $("#send_invoice").click(function () {
@@ -711,11 +715,11 @@
                     var invoicecode_id = $("#select_mauso").find("option:selected").attr("data-id");
                     var series = $("#select_mauso").find("option:selected").attr("data-kyhieu");
                     var mau_hd = $("#select_mauso").find("option:selected").attr("data-mauso");
-
+                    var tt78 = $("#select_mauso").find("option:selected").attr("data-tt78");
 
                     if (session_org != "" && session_id != "") {
 
-                        window.location.href = '@Url.Action("GetOrderDetails", "Install")?orgid=' + session_org + '&id=' + session_id + '&inv_invoicecode_id=' + invoicecode_id + '&inv_invoiceseries=' + series + '&mau_so=' + mau_hd;
+                        window.location.href = '@Url.Action("GetOrderDetails", "Install")?orgid=' + session_org + '&id=' + session_id + '&inv_invoicecode_id=' + invoicecode_id + '&inv_invoiceseries=' + series + '&mau_so=' + mau_hd + '&tt78='+tt78;
 
                         //$.ajax({
                         //    type: "POST",
